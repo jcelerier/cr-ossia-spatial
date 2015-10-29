@@ -118,24 +118,32 @@ De plus, ces objets ne vont pas forcément réagir comme prévu : si par exemple
 \section{Réalisations}
 \subsection{État de l'art sur méthodes spatiales, positionnement, trajectoires}
 
-
-Un outil exposant des sources OpenAL via le protocole Minuit et permettant de charger des sons, puis de les positionner dans l'espace a été implémenté. Ces sources sont donc contrôlables depuis i-score.
-
-\subsection{Free-hand drawing sur tableau}
+\subsubsection{Free-hand drawing sur tableau}
 À titre d'exemple pour des démonstrations et exposés, un outil permettant de dessiner des zones de manières arbitraire sur un tablea a été développé. % TODO screenshot
 
-\subsection{Liste des tâches et prototype pour processus de mapping spatial}
+\subsubsection{Liste des tâches et prototype pour processus de mapping spatial}
+Suite aux différents cas d'utilisation qui ont été présentés, un état de l'art a été effectué dans le domaine de l'authoring spatial, et des techniques et méthodes possibles.
 
-\subsection{Clients adaptés aux données spatiales}
+- 
+
+
+\subsection{Clients manipulant des données spatiales}
 \subsubsection{Interopérabilité avec Qt}
 Un plug-in pour i-score permettant d'exposer l'arbre d'objets d'une application Qt a été développé. Cela permet de contrôler facilement la position et le contenu des éléments d'une interface graphique réalisée avec cette technologie depuis i-score.
 
 \subsubsection{Contrôle d'OpenAL}
 OpenAL est une bilbiothèque ayant été développée pour les besoins des jeux vidéos au début des années 2000. Elle se base sur une notion de sources sonores associées à des fichiers sons, qui sont positionnées en trois dimensions, ainsi que d'un listener qui se déplace et perçoit donc les sons plus ou moins forts. Une implémentation récente, OpenAL-soft, permet d'utiliser des HRTF pour avoir une sensation de spatialisation réaliste au casque.  
+
+Un outil exposant des sources OpenAL via le protocole Minuit et permettant de charger des sons, puis de les positionner dans l'espace a été implémenté. Ces sources sont donc contrôlables depuis i-score.
+
 \subsubsection{Contrôle de metabots}
 Une couche de communication entre i-score et les robots metabot %TODO photo
 a été développée et a mené à une présentation aux Robot Makers Day, avec notamment 
 une chorégraphie ou deux robots sont contrôlés et synchronisés musicalement avec i-score. 
+
+Cela a été l'occasion de comparer le développement d'une chorégraphie entre i-score, et 
+un langage de programmation graphique inspiré de Scratch. Les résultats ont été probants : il a fallu 
+beaucoup moins de temps pour produire une même chorégraphie dans i-score que dans l'autre langage.
 
 \section{Conclusion}
 
