@@ -19,40 +19,38 @@ Il existe trois défis majeurs : la conception d'un modèle de données généri
 Nous analyserons plusieurs types de projets différents dans lesquels une notion
 de contrôle spatial existe, et qui sont utiles à la spécification des besoins.
 
-Puis, nous verrons des solutions possibles pour en permettre un contrôle efficace.
+Puis, nous présenterons les solutions et prototypes qui ont été développés dans le cadre du projet OSSIA, afin de tenter de répondre à au moins partie des besoins qui ont été exprimés.
 
 \section{Exemples}
 Les exemples sont répartis en trois catégories : ceux liés aux problématiques spatiales dans un contexte sonore et musical, ceux liés aux conceptions d'interfaces, et un cas de contrôle robotique.
 
 \subsection{Cadre sonore}
-La spatialisation en musique est une pratique très courante et une recherche importante a eu lieu sur ce sujet.
+La spatialisation en son, puis musique est une pratique très courante et une recherche importante a eu lieu sur ce sujet.
 
-Il existe deux problèmes distincts et parfois rammenés sous la même égide de spatialisation : 
+Il existe deux problèmes distincts que l'on place parfois sous le même terme de spatialisation du son : 
 \begin{itemize}
-\item La composition du son avec des composantes spatiales : conception de trajectoires, etc. (citer livre Trajectoires en Musique Électro-acoustiques + livre de Bertrand Merlier.)
-\item Le rendu avec un ensemble de hauts-parleurs ou au casque (HRTF, etc.).
+\item La composition du son avec des composantes spatiales : conception de trajectoires qui vont faire tourner le son, etc. \footnote{\textit{Vocabulaire de l'espace en musiques électroacoustiques}, 2006, Bertrand Merlier, et\textit{La spatialisation des musiques électro-acoustiques}. 2012, Laurent Pottier.}
+\item Les méthodes et algorithmes permettant le rendu de cet espace avec un ensemble de hauts-parleurs ou au casque (HRTF, etc.).
 \end{itemize}
 
-C'est le premier aspect qui nous intéresse ici. 
-Il existe deux fonctionnements possibles, l'un plus adapté au monde de la musique et l'autre au monde de la muséographie. 
-
+C'est le premier point qui nous intéresse ici. Nous pouvons le préciser encore plus en étudiant les fonctionnements et conceptions différentes qu'il peut y avoir selon que l'objectif soit de composer de la musique, ou bien de concevoir des systèmes interactifs.
 
 \subsubsection{Trajectoires sonores}
 Dans un cadre musical, on aura tendance à composer par pistes, et donc à vouloir spatialiser piste par piste. Des objets sonores seront disposés dans un séquenceur tel que Pro Tools ou Reaper, puis, au moment de la composition ou bien lors d'une interprétation en concert, les différentes pistes sont envoyées sur différents canaux audio.
 
-\begin{figure}
+Il existe des méthodes plus sophistiquées permettant de définir des trajectoires graphiquement, comme IanniX en figure\ref{fig.iannix}, ou bien à l'aide de modèles inspirés de lois physiques, auquel cas des applications spécifiques sont développées pour la composition. Par exemple, les modèles masse-ressort sont souvent utilisés dans ce but.
+
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.3]{images/iannix.png}
 \caption{Une partition composée de trajectoires et de triggers dans le séquenceur graphique IanniX}
+\label{fig.iannix}
 \end{figure}
 
-
-
 \subsubsection{Positionnement d'objets sonores}
-Dans un cadre muséographique, on a plus souvent des objets sonores qui peuvent être associés à des éléments graphiques : des notes dans un manuscrit, un personnage sur un tableau... On désire alors contrôler le comportement de cet objet sonore au fil du temps et le scénariser, le faire se déplacer, etc.
+Dans un cadre muséographique, on a plus souvent des objets sonores qui peuvent être associés à des éléments graphiques : des notes dans un manuscrit, un personnage sur un tableau... On désire alors contrôler le comportement de cet objet sonore au fil du temps et le scénariser, le faire se déplacer, changer ses propriétés sonores, etc.
 
-Cette approche est aussi plus pertinente dans un cadre vidéo-ludique : en effet, les outils de conception de jeu-vidéo (citer partie rapport cnam) ont une approche fortement orientée objet - la méthode actuellement la plus répandue dans l'industrie est celle des Entity Component Systems %todo source
-, qui permet d'appliquer différentes couches applicatives (qui peuvent contenir des données, des comportements...) à un objet du jeu, comme un ennemi.
+Cette approche est aussi plus pertinente dans un cadre vidéo-ludique : en effet, les outils de conception de jeu-vidéo (\textit{citer partie rapport cnam}) ont une approche fortement orientée objet - la méthode actuellement la plus répandue dans l'industrie est le pattern Entity-Component-Systems\footnote{Component Based Engine Design, Randy Gaul : http://www.randygaul.net/2013/05/20/component-based-engine-design/}, qui permet d'encapsuler différentes couches applicatives (qui peuvent contenir des données, des comportements...) très simplement dans n'importe quel objet du jeu.
 
 Voici plusieurs examples d'applications :
 \paragraph{Application 1 : Sonopluie}
@@ -76,11 +74,9 @@ cf. rapport CNAM
 \subsection{Cadre IHM}
 Ici, nous nous intéressons aux possibilités de création et de contrôle dynamique d'interfaces graphiques. La plupart des paradigmes d'UI permettent de définir des vues dans un éditeur graphique, mais ces vues sont en général statiques et il est nécessaire de recourir à des langages de programmation pour avoir une évolution dans le logiciel \textit{(à vrai dire il y a des outils graphiques pour ça dans Qt par exemple, j'imagine que ça doit pouvoir se faire assez bien dans Flash aussi ?)}. 
 
-Problématiques : création d'objet ??
+Nous aborderons ici deux cas : le premier est celui des interfaces utilisateur programmables graphiquement, ce qui peut s'avérer utile quand il y a de nombreuses animations et objets graphiques non-usuels. Le second est celui des interfaces nécessaires pour contrôler des espaces de paramètres particuliers.
 
-Pb. de l'interface d'animation (gestion du temps, tweens ,etc.)
-
-Comportements de masse / comportements aléatoires ?
+Il reste des problèmes non abordés : notamment la création d'objets dynamique, la visualisation, et la gestion de comportements d'objets en masse, comme par exemple pour un générateur de particules.
 
 \subsubsection{Contrôle d'interfaces utilisateurs}
 Le premier cas est celui d'une application en mode kiosque, possédant un menu de choix des langues, qui mène pour chaque langue à un menu principal permettant de choisir des vidéos à lire en mosaïque.
@@ -92,11 +88,19 @@ Lorsqu'une langue est choisie, l'écran principal glisse depuis la droite. Les b
 Les problématiques, ici, sont : 
 \begin{itemize}
 \item Le contrôle d'un grand nombre d'élements statiques, et la hiérarchisation de ces éléments. Par exemple, si les boutons de langues sont enfants du premier menu, on veut qu'ils suivent le déplacement de leur menu parent.
-\item Un questionnement sur les modèles physiques. Cela a déjà été abordé pour les modèles masse-ressort évoqués en spatialisation de musique %TODO.
+\item Un questionnement sur les modèles physiques. Cela a déjà été abordé pour les modèles masse-ressort évoqués en spatialisation de musique.
 \item La gestion d'animations. Généralement, une animation consiste en l'interpolation de paramètres dans le temps, en passant par des états prédéfinis (keyframes).
 \end{itemize}
 
 \subsubsection{Navigation dans espaces de paramètres}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{images/iscore.png}
+\caption{De nombreux paramètres sur un seul axe dans i-score, rendant la partition peu lisible.}
+\label{fig.iscore}
+\end{figure}
+
 Un problème plus général est celui de la gestion des espaces de paramètres particuliers.
 
 Par exemple, pour choisir et animer la couleur d'un élément dans le temps, il est nécessaire d'avoir des outils de création adaptés, tout en gardant les primitves de trajectoires et d'objets évoquées précédemment.
@@ -105,10 +109,17 @@ Un second point est celui de la gestion des correspondances entre espaces de don
 
 De même, pour les couleurs il est important de pouvoir travailler en RVB, mais aussi en L*a*b*, HSL, et notamment de pouvoir passer facilement d'un mode à l'autre.
 
-Enfin, le dernier point est le cas d'une aide à l'écriture pour une application comportant un grand nombre de paramètres, potentiellement artistiques. Le problème de la visualisation se pose lorsque ces paramètres sont représentés sur une seule dimension : %TODO screenshot iscore
+Enfin, le dernier point est le cas d'une aide à l'écriture pour une application comportant un grand nombre de paramètres, potentiellement artistiques. Le problème de la visualisation se pose lorsque ces paramètres sont représentés sur une seule dimension, comme en fig.~\ref{fig.iscore}.
 
 \subsection{Contrôle de robots}
-Une application intéressante est celle des chorégraphies de robot. Ce chantier, commencé en 2015, vise à étendre les possibilités du séquenceur i-score d'abord à des robots quadrupèdes Metabots, puis, potentiellement à des drones.
+Une application intéressante est celle des chorégraphies de robot. Ce chantier, commencé en 2015, vise à étendre les possibilités du séquenceur i-score d'abord à des robots quadrupèdes Metabots (fig.~\ref{fig.metabots}), puis, potentiellement à des drones.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.2]{images/spidey.jpg}
+\caption{Un metabot.}
+\label{fig.metabots}
+\end{figure} %TODO mettre sc iscore
 
 Là encore, la question de l'écriture se pose, et notamment le cas de la gestion d'un grand nombre d'objets dans un espace relativement restreint.
 
@@ -116,16 +127,9 @@ De plus, ces objets ne vont pas forcément réagir comme prévu : si par exemple
 
 
 \section{Réalisations}
-\subsection{État de l'art sur méthodes spatiales, positionnement, trajectoires}
+Les réalisations se séparent en deux catégories : la première consiste en des extensions pour i-score ou d'autres logiciels et frameworks. Ces logiciels ont été retenus car ils sont directement en lien avec les problématiques qui ont été évoquées précédemment.
 
-\subsubsection{Free-hand drawing sur tableau}
-À titre d'exemple pour des démonstrations et exposés, un outil permettant de dessiner des zones de manières arbitraire sur un tablea a été développé. % TODO screenshot
-
-\subsubsection{Liste des tâches et prototype pour processus de mapping spatial}
-Suite aux différents cas d'utilisation qui ont été présentés, un état de l'art a été effectué dans le domaine de l'authoring spatial, et des techniques et méthodes possibles.
-
-- 
-
+Puis, une fois ces cas étudiés, nous avons tenté d'apporter une solution originale au problème d'écriture qui se pose.
 
 \subsection{Clients manipulant des données spatiales}
 \subsubsection{Interopérabilité avec Qt}
@@ -137,13 +141,32 @@ OpenAL est une bilbiothèque ayant été développée pour les besoins des jeux 
 Un outil exposant des sources OpenAL via le protocole Minuit et permettant de charger des sons, puis de les positionner dans l'espace a été implémenté. Ces sources sont donc contrôlables depuis i-score.
 
 \subsubsection{Contrôle de metabots}
-Une couche de communication entre i-score et les robots metabot %TODO photo
+Une couche de communication entre i-score et les robots Metabots
 a été développée et a mené à une présentation aux Robot Makers Day, avec notamment 
 une chorégraphie ou deux robots sont contrôlés et synchronisés musicalement avec i-score. 
 
 Cela a été l'occasion de comparer le développement d'une chorégraphie entre i-score, et 
 un langage de programmation graphique inspiré de Scratch. Les résultats ont été probants : il a fallu 
 beaucoup moins de temps pour produire une même chorégraphie dans i-score que dans l'autre langage.
+
+
+\subsection{État de l'art sur méthodes spatiales, positionnement, trajectoires}
+
+\subsubsection{Free-hand drawing sur tableau}
+À titre d'exemple pour des démonstrations et exposés, un outil permettant de dessiner des zones de manières arbitraire sur un tableau a été développé (cf. fig.~\ref{fig.tableau}).
+
+Lorsqu'une zone est cliquée, elle produit un son. % TODO mettre minuit là dedans ?
+\begin{figure}
+\centering
+\includegraphics[scale=0.2]{images/harbour.png}
+\caption{Un tableau sur lequel on peut apposer des couches sonores.}
+\label{fig.tableau}
+\end{figure} 
+
+\subsubsection{Liste des tâches et prototype pour processus de mapping spatial}
+Suite aux différents cas d'utilisation qui ont été présentés, un état de l'art a été effectué dans le domaine de l'authoring spatial, et des techniques et méthodes possibles.
+
+%TODO
 
 \section{Conclusion}
 
