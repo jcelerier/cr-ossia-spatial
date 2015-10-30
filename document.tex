@@ -1,10 +1,13 @@
-\documentclass[french]{article}
+\documentclass[french,12pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{kpfonts}
 \usepackage{babel}
 \usepackage{microtype}
 \usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{hmargin=2.5cm,vmargin=1.5cm}
 \begin{document}
 
 \section{Préambule}
@@ -70,8 +73,7 @@ Cette application a plusieurs pré-requis :
 
 cf. rapport CNAM 
 
-
-\subsection{Cadre IHM}
+\subsection{Interactivité et interfaces}
 Ici, nous nous intéressons aux possibilités de création et de contrôle dynamique d'interfaces graphiques. La plupart des paradigmes d'UI permettent de définir des vues dans un éditeur graphique, mais ces vues sont en général statiques et il est nécessaire de recourir à des langages de programmation pour avoir une évolution dans le logiciel \textit{(à vrai dire il y a des outils graphiques pour ça dans Qt par exemple, j'imagine que ça doit pouvoir se faire assez bien dans Flash aussi ?)}. 
 
 Nous aborderons ici deux cas : le premier est celui des interfaces utilisateur programmables graphiquement, ce qui peut s'avérer utile quand il y a de nombreuses animations et objets graphiques non-usuels. Le second est celui des interfaces nécessaires pour contrôler des espaces de paramètres particuliers.
@@ -111,7 +113,19 @@ De même, pour les couleurs il est important de pouvoir travailler en RVB, mais 
 
 Enfin, le dernier point est le cas d'une aide à l'écriture pour une application comportant un grand nombre de paramètres, potentiellement artistiques. Le problème de la visualisation se pose lorsque ces paramètres sont représentés sur une seule dimension, comme en fig.~\ref{fig.iscore}.
 
-\subsection{Contrôle de robots}
+\subsection{L'espace pour le spectacle}
+\subsubsection{Danse interactive}
+Dans cette application, nous désirons travailler avec plusieurs danseurs sur scène, et produire un comportement émergent au gré de leurs déplacements et du scénario du spectacle.
+
+Le premier cas est très simple : il existe un cercle virtuel et invisible au sol, délimité par l'auteur du spectacle, et on désire allumer une lumière lorsqu'un danseur rentre dans le cercle. C'est similaire au cas de Sonopluie vu plus tôt et se rapporte à un simple test booléen.
+
+Nous aimerions maintenant créer de la géométrie. Soient deux danseurs : la seconde partie du spectacle consiste à allumer la lumière lorsque le barycentre des deux danseurs est dans le cercle virtuel. Cela requiert, en plus  de ce qui a été dit précédemment, de la nécessité d'avoir une géométrie dynamique et définie par des paramètres provenant de l'extérieur.
+
+Enfin, dans la dernière partie du spectacle, nous utilisons la distance entre les deuxs danseurs pour faire varier le rayon du cercle au centre de la scène.
+
+Dans cet exemple, nous avons donc comme caractéristique principale une grande liberté de contrôle laissée à l'auteur, ainsi que la capacité de définir des géométries complexes.
+
+\subsubsection{Contrôle de robots}
 Une application intéressante est celle des chorégraphies de robot. Ce chantier, commencé en 2015, vise à étendre les possibilités du séquenceur i-score d'abord à des robots quadrupèdes Metabots (fig.~\ref{fig.metabots}), puis, potentiellement à des drones.
 
 \begin{figure}[h]
@@ -136,7 +150,7 @@ Puis, une fois ces cas étudiés, nous avons tenté d'apporter une solution orig
 Un plug-in pour i-score permettant d'exposer l'arbre d'objets d'une application Qt a été développé. Cela permet de contrôler facilement la position et le contenu des éléments d'une interface graphique réalisée avec cette technologie depuis i-score.
 
 \subsubsection{Contrôle d'OpenAL}
-OpenAL est une bilbiothèque ayant été développée pour les besoins des jeux vidéos au début des années 2000. Elle se base sur une notion de sources sonores associées à des fichiers sons, qui sont positionnées en trois dimensions, ainsi que d'un listener qui se déplace et perçoit donc les sons plus ou moins forts. Une implémentation récente, OpenAL-soft, permet d'utiliser des HRTF pour avoir une sensation de spatialisation réaliste au casque.  
+OpenAL est une bilbiothèque ayant été développée pour les besoins des jeux vidéos au début des années 2000. Elle se base sur une notion de sources sonores associées à des fichiers sons, qui sont positionnées en trois dimensions, ainsi que d'un listener qui se déplace et perçoit donc les sons plus ou moins forts. Une implémentation récente, \textbf{OpenAL-soft}\footnote{http://kcat.strangesoft.net/openal.html}, permet d'utiliser des HRTF pour avoir une sensation de spatialisation réaliste au casque.  
 
 Un outil exposant des sources OpenAL via le protocole Minuit et permettant de charger des sons, puis de les positionner dans l'espace a été implémenté. Ces sources sont donc contrôlables depuis i-score.
 
@@ -155,18 +169,51 @@ beaucoup moins de temps pour produire une même chorégraphie dans i-score que d
 \subsubsection{Free-hand drawing sur tableau}
 À titre d'exemple pour des démonstrations et exposés, un outil permettant de dessiner des zones de manières arbitraire sur un tableau a été développé (cf. fig.~\ref{fig.tableau}).
 
-Lorsqu'une zone est cliquée, elle produit un son. % TODO mettre minuit là dedans ?
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.2]{images/harbour.png}
 \caption{Un tableau sur lequel on peut apposer des couches sonores.}
 \label{fig.tableau}
 \end{figure} 
 
+Lorsqu'une zone est activée, elle produit un son qui peut être en relation avec les éléments sous-jacents. % TODO mettre minuit là dedans ?
+
 \subsubsection{Liste des tâches et prototype pour processus de mapping spatial}
 Suite aux différents cas d'utilisation qui ont été présentés, un état de l'art a été effectué dans le domaine de l'authoring spatial, et des techniques et méthodes possibles.
 
-%TODO
+Cet état de l'art a ensuite conduit à la recherche de méthodes possibles pour combler le besoin existant pour un outil permettant de spécifier des scénarios manipulant beaucoup de données spatiales entrelacées entre elles, ainsi qu'avec une évolution temporelle.
+
+Le premier point auquel nous nous intéressons est celui du modèle de données. Il existe deux courants : les approches orientées langage, et les approches orientées données. 
+
+Les premières sont des langages de programmation spécifiquement étudiés pour résoudre le problème posé de manière élégante. Plusieurs possibilités ont été étudiées : 
+\begin{itemize}
+\item Utiliser un langage de script existant, tel que Lua, Python ou JavaScript pour définir les objets et comportements spatiaux. L'avantage est une très grande flexibilité, mais les capacités d'analyse statique et d'optimisation sont diminuées si l'intégralité du langage est accessible à l'utilisateur.
+\item Il existe une famille de langages plus spécialisés dans la gestion de données interactives : c'est le courant de la programmation fonctionnelle réactive\footnote{\textit{Arrows, robots, and functional reactive programming}, 2003, Paul Hudak}.
+\item Un DSL (langage spécifique à un domaine) pensé pour la création de graphismes vectoriels est présent dans le package Haskell \textsc{diagrams}. Il fonctionne à l'aide d'un jeu de primitives réduites qui doivent être composées par la suite.
+\item L'approche que nous avons pour l'instant retenue est d'utiliser un système de calcul symbolique\footnote{En pratique le choix s'est porté sur GiNaC : \url{www.ginac.de}}. Ainsi, le langage utilisé est simple : ce sont les mathématiques traditionnelles. L'avantage est la relative simplicité à l'utilisation par rapport à la nécessité d'apprendre un langage complet, ainsi que la possibilité de changer de moteur de résolution si celui choisi n'offre pas les performances adéquates.
+En revanche, il n'est plus possible de gérer des cas comme des boucles, etc.
+\end{itemize}
+
+En parallèle, les approches orientées données sont souvent plus adaptées à une manipulation directe par un utilisateur novice, car elles sont basées sur des outils graphiques, ou de plus haut niveau : 
+\begin{itemize}
+\item Il existe des modèles qualitatifs de représentation des données spatiales : RCC-8, OPRA-4, etc. Ces modèles sont principalement étudiés dans le monde de l'intelligence artificielle et de l'ingénierie des connaissances. Ils sont notamment utilisés pour de la reconaissance d'images, de lieus, etc.
+\item Le parc de logiciels graphiques existant se base souvent sur quelques primitives simples qui sont ensuites composées entre elles, ainsi que sur l'utilisation de modèles 3D, comme pour Maya en figure~\ref{fig.maya}.
+
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{images/maya.jpg}
+\caption{Primitives graphiques dans le logiciel de 3D Maya.}
+\label{fig.maya}
+\end{figure} 
+
+La méthode que nous proposons combine les deux : utiliser un CAS pour spécifier des objets de base avec les quels travailler, puis permettre à l'utilisateur de faire des transformations graphiques - translation, rotation, scale - sur les objets. Les paramètres de ces objets sont extraits de la formule mathématique et séparés en deux ensembles : ceux qui font partie de l'espace d'évaluation et ceux qui font partie de l'espace de paramétrisation. Par la suite, des propriétés peuvent être extraites à l'aide d'algorithmes intervenant plus tard, comme la collision entre deux objets. Ces propriétés sont ensuites utilisables dans le reste d'i-score via l'arbre de paramètres.
+
+Le rendu se fait actuellement par un algorithme naïf de pixelisation, qui devra par la suite être étendu à de la voxelisation pour une manipulation en trois dimensions. Pour des objets définis dans plus de de trois dimensions, il est possible de choisir la restriction que l'on visualise. 
+
+La manipulation et l'édition des objets ainsi créé est faite via l'édition de l'équation de manière textuelle, et nous désirons étudier les interactions utilisateur possibles pour une édition via des modalités purement graphique. 
+
 
 \section{Conclusion}
 
