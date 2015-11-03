@@ -7,11 +7,14 @@
 \usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{hyperref}
+\usepackage{acronym}
 \usepackage[backend=biber]{biblatex}
 \bibliography{document.bib} % or
 \geometry{hmargin=2.5cm,vmargin=1.5cm}
 
 \title{État de l'art - spatial}
+
+\acrodef{ENP}{Expressive Notation Package}
 \begin{document}
 \maketitle
 
@@ -49,6 +52,7 @@ Nous étudierons d'abord le cas de l'audio et de la spatialisation en audio (met
 Utilisation dans la musique, ainsi que dans des applications de réalité augmentée.
 
 Problème principal dans cadre musical : couplage fort entre l'écriture et le moyen de restitution. Par exemple il est souvent nécessaire d'ajuster les paramètres de spatialisation quand on change l'endroit ou se déroule une représentation. %TODO trouver source.
+Par exemple, la bibliothèque HOA~\cite{colafrancesco_bibliotheque_2013} permet l'encodage et le décodage ambisonique ou binaural. Elle fournit en même temps des outils permettant de modifier et travailer la position des sons dans l'espace, et qui peuvent donc être utilisés à fin d'écriture.
 
 Nous étudions aussi le cas de l'audio dans un cadre de systèmes interactifs : ce sont des systèmes soit très statiques comme dans un audio-guide, soit très dynamiques mais avec une boucle d'exécution simple.
 Par exemple, il est possible d'apposer des couches audio dans un espace réel à l'aide de cartes pour faire des parcours\cite{lemordant_augmented_2010}. 
@@ -56,12 +60,14 @@ Par exemple, il est possible d'apposer des couches audio dans un espace réel à
 
 \subsubsection{Composition et écriture}
 Une présentation de l'état actuel de l'écriture spatiale en musique est donnée dans~\cite{fober_les_2015}. Notamment, la question de la notation dans le cadre de partitions impliquant des éléments spatiaux est abordé. % CITER PARTITIONS GRAPHIQUES.
-Ces partitions peuvent être spatiales uniquement dans leur représentation, mais peuvent aussi indiquer des manières d'interpréter dans l'espace~\cite{ellberger_spatialization_2014}. Une taxinomie des possibilités de création dans l'espace en musiques électro-acoustiques est présentée par Bertrand Merlier dans~\cite{merlier_vocabulaire_2006}. Elle est étendue dans l'ouvrage \textit{Vocabulaire de l'espace en musique électro-acoustique\cite{merlier_vocabulaire_2006}.
+Ces partitions peuvent être spatiales uniquement dans leur représentation, mais peuvent aussi indiquer des manières d'interpréter dans l'espace, notamment à l'aide de symboles spécialisés~\cite{ellberger_spatialization_2014}. Une taxinomie des possibilités de création dans l'espace en musiques électro-acoustiques est présentée par Bertrand Merlier dans~\cite{merlier_vocabulaire_2006}. Elle est étendue dans l'ouvrage \textit{Vocabulaire de l'espace en musique électro-acoustique\cite{merlier_vocabulaire_2006_book}}.
 
+Des outils logiciels existent pour ces partitions -- ils sont souvent spécialisés. Par exemple, la bibliothèque \ac{ENP}\cite{kuuskankare_expressive_2006} permet de concevoir des partitions graphiques à l'aide d'un éditeur lui aussi graphique et d'un langage basé sur LISP.
 
-\cite{fober_les_2015}
-\cite{delle_monache_sonic_2011}
-\cite{colafrancesco_bibliotheque_2013}
+Une des problématiques pour la représentation de l'écriture musicale est celle du geste, et de son lien avec la partition : comment notamment annoter le geste du musicien avec précision ?
+
+Il existe un second problème de dissociation : celui entre la forme graphique et le résultat. Ainsi, des outils tels que % SOURCE
+permettent de  travailler avec des trajectoires, mais uniquement pour des objets audio.
 
 - Partitions graphiques
 - IanniX
