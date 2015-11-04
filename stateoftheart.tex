@@ -15,6 +15,7 @@
 \title{État de l'art - spatial}
 
 \acrodef{ENP}{Expressive Notation Package}
+\acrodef{GPU}{Graphics Processing Unit}
 \begin{document}
 \maketitle
 
@@ -72,14 +73,27 @@ permettent de  travailler avec des trajectoires, mais uniquement pour des objets
 - Partitions graphiques
 - IanniX
 
-\subsubsection{Positionnement spatial}
-\cite{wozniewski_framework_2006}
+\subsubsection{Composition dans des environnements en 3D}
+Une approche particulière est celle de l'immersion dans un monde virtuel en trois-dimensions pour la composition de musique. Cette approche est présentée par Michael Wozniewski dans~\cite{wozniewski_framework_2006}. Cela permet de définir et visualiser la propagation potentielle des ondes sonores dans un espace donné. De plus, en utilisant des méthodes de tracking de mouvement et des casques de réalité virtuelle, il est possible d'ouvrir de nombreuses possibilités d'interaction manuelle avec des objets virtuels. L'implémentation est faite en PureData.
+
+D'autres possibilités d'utilisation d'environnement 3d à des fins d'écriture musicale sont suivies par Florent Berthaut avec le DRILE\cite{berthaut_drile:_2010}. Notamment, l'interaction spatiale est utilisée pour manipuler une hiérarchie plus aisément que via des interactions WIMP traditionnelles.
+
+Dans les deux cas, ce sont des approches orientées vers la manipulation d'objets.
+
+\subsubsection{Acoustique virtuelle}
+Il existe plusieurs méthodes pour simuler un environnement virtuel (comme par exemple dans un jeu vidéo) sur le plan acoustique, en tenant compte de la géométrie dans laquelle peut se trouver le joueur (les approches les plus basiques utilisent simplement une atténuation linéaire entre la position du microhpone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir).
+
+Cependant, il existe peu d'approches permettant d'être créatif par rapport aux possibilités qui sont offertes par l'outil informatique : notamment, les sources sont souvent ponctuelles alors que rien n'empêche de réfléchir à des sources planes ou volumétriques. 
+
+Le rendu se fait généralement à l'aide de méthodes de lancer de rayon, inspirées des procédés utilisés en images de synthèse \cite{funkhouser_beam_1998,tsingos_fast_1998}.
+Un procédé courant est maintenant d'utiliser les \ac{GPU} pour effectuer des calculs lourds mais facilement parallélisables\cite{rodriguez_performance_2014,cheng_design_2014,taylor_guided_2012}. Il est aussi possible de précalculer une fonction de convolution correspondant aux environnements virtuels que l'on veut parcourir, cependant cela demande des ressources en mémoire très importantes\cite{raghuvanshi_parametric_2014}.
+
 \subsubsection{Restitution spatiale}
-- Rendu de son dans des espaces virtuels \cite{funkhouser_beam_1998,cheng_design_2014,tsingos_fast_1998,taylor_guided_2012,raghuvanshi_parametric_2014,rodriguez_performance_2014}
-Outils pour la création de tels espaces (funkhouser), 
-- Méthodes : WFS, Amibisonie... \cite{lim_3d_2015}
-\cite{perez-lopez_3dj_2015}
-\cite{noisternig_3d_2003}\cite{bates_comparative_2007},\cite{tang_assistive_2014},\cite{sasamoto_controlling_2013},\cite{delerue_spatialisation_2004}
+Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bilbiothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, VBAP, DBAP et WFS.
+
+La communication entre la gestion de la scène et le rendu se fait via le format standardisé SpatDIF\cite{peters_spatial_2013} par OSC.
+
+\cite{bates_comparative_2007},\cite{tang_assistive_2014},\cite{sasamoto_controlling_2013},\cite{delerue_spatialisation_2004}
 
 - Utilisation de données spatiales pour la création artistique \cite{naveda_topos_2014}
 
