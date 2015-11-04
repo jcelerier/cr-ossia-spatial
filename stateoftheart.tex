@@ -16,6 +16,9 @@
 
 \acrodef{ENP}{Expressive Notation Package}
 \acrodef{GPU}{Graphics Processing Unit}
+\acrodef{DBAP}{Distance-Based Amplitude Panning}
+\acrodef{VBAP}{Vector Base Amplitude Panning}
+\acrodef{WFS}{Wave-Field Synthesis}
 \begin{document}
 \maketitle
 
@@ -65,13 +68,17 @@ Ces partitions peuvent être spatiales uniquement dans leur représentation, mai
 
 Des outils logiciels existent pour ces partitions -- ils sont souvent spécialisés. Par exemple, la bibliothèque \ac{ENP}\cite{kuuskankare_expressive_2006} permet de concevoir des partitions graphiques à l'aide d'un éditeur lui aussi graphique et d'un langage basé sur LISP.
 
-Une des problématiques pour la représentation de l'écriture musicale est celle du geste, et de son lien avec la partition : comment notamment annoter le geste du musicien avec précision ?
+Une des problématiques actuelles pour la représentation de l'écriture musicale est celle du geste, et de son lien avec la partition : comment notamment annoter le geste du musicien avec précision ?
 
-Il existe un second problème de dissociation : celui entre la forme graphique et le résultat. Ainsi, des outils tels que % SOURCE
-permettent de  travailler avec des trajectoires, mais uniquement pour des objets audio.
+Une autre question est l'association entre l'aspect graphique et le résultat. Ainsi, des outils tels que HoloEdit et HoloSpat permettent de travailler avec des trajectoires, mais sont extrêmement spécialisés pour des objets audio. C'est notamment du à la nécessité de composer en ayant conscience à chaque instant des fortes contraintes techniques du moyen de restitution de l'oeuvre. Il serait intéressant d'utiliser ces trajectoires pour contrôler non pas des sources sonores mais des éléments dans des espaces de paramètres quelconques.
 
-- Partitions graphiques
-- IanniX
+Le logiciel IanniX\cite{jacquemin_iannix_2012} dispose aussi de nombreuses possibilités d'écriture spatiale : les partitions sont des ensembles d'éléments graphiques définis paramétriquement ou bien à l'aide d'un langage de programmation dédié, que des curseurs vont parcourir. L'information de position de chaque curseur est envoyée en OSC, ce qui permet l'intégration à d'autres logiciels.
+
+Une méthode d'écriture de la spatialisation par contraintes est proposée par Olivier Delerue avec le système MusicScpace\cite{delerue_spatialisation_2004}. Cela permet une approche déclarative à l'écriture de partition, en spécifiant des contraintes telles que "deux objets ne doivent jamais être à plus de deux mètres l'un de l'autre" ou bien "l'angle entre deux objets et l'auditeur doit être supérieur à 90 degrés". Les objets peuvent être notamment des sources sonores. Une édition graphique de ces contraintes est proposée, et elles sont représentées en termes de cercles et de segments reliant les objets qu'elles contraignent.
+
+Des données spatiales peuvent aussi être utilisées directement pour créer des mappings sonores. C'est le cas notamment de la bibliothèque Topos\cite{naveda_topos_2014}, qui permet de capter le mouvement de danseurs et d'en extraire des informations pouvant être utiles pour la conception de pièces de musique interactives. Une fois que le mouvement du danseur est capturé via un périphérique externe, il devient possible d'extraire des informations telles que le volume occupé par le danseur, sa vitesse, ou bien diverses mesures relatives à l'évolution de deux ou quatres points dans le temps, comme l'instabilité ou les collisions entre différentes parties du corps. Ces données peuvent ensuite être réutilisées dans Pure Data pour de la génération de musique.
+\subsubsection{Interaction spatiale pour création de son}
+,\cite{sasamoto_controlling_2013},
 
 \subsubsection{Composition dans des environnements en 3D}
 Une approche particulière est celle de l'immersion dans un monde virtuel en trois-dimensions pour la composition de musique. Cette approche est présentée par Michael Wozniewski dans~\cite{wozniewski_framework_2006}. Cela permet de définir et visualiser la propagation potentielle des ondes sonores dans un espace donné. De plus, en utilisant des méthodes de tracking de mouvement et des casques de réalité virtuelle, il est possible d'ouvrir de nombreuses possibilités d'interaction manuelle avec des objets virtuels. L'implémentation est faite en PureData.
@@ -81,7 +88,9 @@ D'autres possibilités d'utilisation d'environnement 3d à des fins d'écriture 
 Dans les deux cas, ce sont des approches orientées vers la manipulation d'objets.
 
 \subsubsection{Acoustique virtuelle}
-Il existe plusieurs méthodes pour simuler un environnement virtuel (comme par exemple dans un jeu vidéo) sur le plan acoustique, en tenant compte de la géométrie dans laquelle peut se trouver le joueur (les approches les plus basiques utilisent simplement une atténuation linéaire entre la position du microhpone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir).
+Il existe plusieurs méthodes pour simuler un environnement virtuel (comme par exemple dans un jeu vidéo) sur le plan acoustique, en tenant compte de la géométrie dans laquelle peut se trouver le joueur.
+
+Les approches les plus simples utilisent simplement une atténuation linéaire entre la position du microphone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir. Différents procédéss, comme ceux proposés par la technologie EAX\cite{funkhouser_survey_2003}, permettent d'ajouter une forme d'occlusion basique, ainsi que des effets de réverbération statique dans des endroits donnés pour enrichir l'impression d'espace. Des outils plus récents tels que FMOD et wWise s'intègrent notamment avec les moteurs de jeux pour pouvoir tirer parti directement des objets positionnés dans l'espace du moteur de jeu.
 
 Cependant, il existe peu d'approches permettant d'être créatif par rapport aux possibilités qui sont offertes par l'outil informatique : notamment, les sources sont souvent ponctuelles alors que rien n'empêche de réfléchir à des sources planes ou volumétriques. 
 
@@ -89,21 +98,24 @@ Le rendu se fait généralement à l'aide de méthodes de lancer de rayon, inspi
 Un procédé courant est maintenant d'utiliser les \ac{GPU} pour effectuer des calculs lourds mais facilement parallélisables\cite{rodriguez_performance_2014,cheng_design_2014,taylor_guided_2012}. Il est aussi possible de précalculer une fonction de convolution correspondant aux environnements virtuels que l'on veut parcourir, cependant cela demande des ressources en mémoire très importantes\cite{raghuvanshi_parametric_2014}.
 
 \subsubsection{Restitution spatiale}
-Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bilbiothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, VBAP, DBAP et WFS.
+Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bilbiothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, \ac{VBAP}, \ac{DBAP} et \ac{WFS}. Une autre proposition d'architecture modulaire, par strates, est proposée par Nils Peters dans~\cite{peters_stratified_2009}.
 
-La communication entre la gestion de la scène et le rendu se fait via le format standardisé SpatDIF\cite{peters_spatial_2013} par OSC.
+La communication entre la gestion de la scène et le rendu se fait via le format standardisé SpatDIF\cite{peters_spatial_2013} par OSC. % TODO décrire plus loin
 
-\cite{bates_comparative_2007},\cite{tang_assistive_2014},\cite{sasamoto_controlling_2013},\cite{delerue_spatialisation_2004}
+Les différentes méthodes de spatialisation citées sont comparées via la capacité des auditeurs à situer la présence d'une source sonore dans l'espace dans~\cite{bates_comparative_2007}, et la précision de leur localisation.
 
-- Utilisation de données spatiales pour la création artistique \cite{naveda_topos_2014}
+L'intérêt de telles restitutions n'est pas seulement artistique : l'audio spatialisé peut être utilisé pour combler les déficiences visuelles, par exemple via un processus de sonification\cite{tang_assistive_2014}. Cela implique notamment une phase de reconnaissance d'objets, puis une phase de mapping d'un espace visuel défini hiérarchiquement vers un espace de sons qui permettra à la personne malvoyante de reconnaître des objets inertes via le son qui leur sera associé.
 
-- Les objets qui étaient auparavant simplement connectés ont maintenant des infos de positions (téléphone, etc.) avec lesquelles il est possible de travailler (\cite{beal_spacetime_2015})
 \subsection{Pratique liée à l'interaction}
+
 \subsubsection{Jeu vidéo}
 \cite{le_prado_ecriture_2013}
 \cite{salazar_modelisation_2004}
 
 \subsubsection{Systèmes interactifs}
+
+- Les objets qui étaient auparavant simplement connectés ont maintenant des infos de positions (téléphone, etc.) avec lesquelles il est possible de travailler (\cite{beal_spacetime_2015})
+
 \cite{chalon_realite_2004}
 \cite{jankowski_advances_2015}
 \cite{shen_blowbrush:_2014}
