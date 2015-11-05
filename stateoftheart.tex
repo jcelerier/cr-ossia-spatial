@@ -62,26 +62,48 @@ Art : \cite{lodi_spatial_2014}. L'espace dans une dimension collective. Exemple 
 Nous étudierons d'abord le cas de l'audio et de la spatialisation en audio (mettre historique).
 
 \subsection{Pratique appliquée à l'audio}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.25]{images/hoalibrary.png}
+    \caption{La bilbiothèque HOA.}
+    \label{fig.hoalib}
+\end{figure}
+
 Utilisation dans la musique, ainsi que dans des applications de réalité augmentée.
 
 Problème principal dans cadre musical : couplage fort entre l'écriture et le moyen de restitution. Par exemple il est souvent nécessaire d'ajuster les paramètres de spatialisation quand on change l'endroit ou se déroule une représentation. %TODO trouver source.
-Par exemple, la bibliothèque HOA~\cite{colafrancesco_bibliotheque_2013} permet l'encodage et le décodage ambisonique ou binaural. Elle fournit en même temps des outils permettant de modifier et travailer la position des sons dans l'espace, et qui peuvent donc être utilisés à fin d'écriture.
+Par exemple, la bibliothèque HOA~\cite{colafrancesco_bibliotheque_2013} (fig.~\ref{fig.hoalib}) permet l'encodage et le décodage ambisonique ou binaural. Elle fournit en même temps des outils permettant de modifier et travailer la position des sons dans l'espace, et qui peuvent donc être utilisés à fin d'écriture.
 
 Nous étudions aussi le cas de l'audio dans un cadre de systèmes interactifs : ce sont des systèmes soit très statiques comme dans un audio-guide, soit très dynamiques mais avec une boucle d'exécution simple.
 Par exemple, il est possible d'apposer des couches audio dans un espace réel à l'aide de cartes pour faire des parcours\cite{lemordant_augmented_2010}. 
 
 
 \subsubsection{Composition et écriture}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/specola.jpg}
+    \caption{\textit{Specola} (LL de Mars) - une pièce acousmatique dont la partition est constituée de nombreux éléments graphiques spécialisés.}
+    \label{fig.specola}
+\end{figure}
+
 Une présentation de l'état actuel de l'écriture spatiale en musique est donnée dans~\cite{fober_les_2015}. Notamment, la question de la notation dans le cadre de partitions impliquant des éléments spatiaux est abordé. % CITER PARTITIONS GRAPHIQUES.
 Ces partitions peuvent être spatiales uniquement dans leur représentation, mais peuvent aussi indiquer des manières d'interpréter dans l'espace, notamment à l'aide de symboles spécialisés~\cite{ellberger_spatialization_2014}. Une taxinomie des possibilités de création dans l'espace en musiques électro-acoustiques est présentée par Bertrand Merlier dans~\cite{merlier_vocabulaire_2006}. Elle est étendue dans l'ouvrage \textit{Vocabulaire de l'espace en musique électro-acoustique\cite{merlier_vocabulaire_2006_book}}.
 
-Des outils logiciels existent pour ces partitions -- ils sont souvent spécialisés. Par exemple, la bibliothèque \ac{ENP}\cite{kuuskankare_expressive_2006} permet de concevoir des partitions graphiques à l'aide d'un éditeur lui aussi graphique et d'un langage basé sur LISP.
+Des outils logiciels existent pour ces partitions -- ils sont souvent spécialisés. Par exemple, la bibliothèque \ac{ENP}\cite{kuuskankare_expressive_2006} permet de concevoir des partitions graphiques telles qu'en fig.~\ref{fig.specola} à l'aide d'un éditeur lui aussi graphique et d'un langage basé sur LISP.
+
 
 Une des problématiques actuelles pour la représentation de l'écriture musicale est celle du geste, et de son lien avec la partition : comment notamment annoter le geste du musicien avec précision ? Et, inversement, comment à partir d'un geste créer un son correspondant ? Ces questions sont abordées dans la description de Soundstudio 4D\cite{sheridan_soundstudio_2004}, dans le cadre d'un système de conception de trajectoires pour spatialisation à l'aide d'interactions en trois dimensions.
 
 Une autre question est l'association entre l'aspect graphique et le résultat. Ainsi, des outils tels que HoloEdit et HoloSpat permettent de travailler avec des trajectoires, mais sont extrêmement spécialisés pour des objets audio. C'est notamment du à la nécessité de composer en ayant conscience à chaque instant des fortes contraintes techniques du moyen de restitution de l'oeuvre. Il serait intéressant d'utiliser ces trajectoires pour contrôler non pas des sources sonores mais des éléments dans des espaces de paramètres quelconques.
 
-Le logiciel IanniX\cite{jacquemin_iannix_2012} dispose aussi de nombreuses possibilités d'écriture spatiale : les partitions sont des ensembles d'éléments graphiques définis paramétriquement ou bien à l'aide d'un langage de programmation dédié, que des curseurs vont parcourir. L'information de position de chaque curseur est envoyée en OSC, ce qui permet l'intégration à d'autres logiciels.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{images/iannix.png}
+    \caption{Le logiciel IanniX.}
+    \label{fig.iannix}
+\end{figure}
+
+Le logiciel IanniX\cite{jacquemin_iannix_2012} (fig.~\ref{fig.iannix}) dispose aussi de nombreuses possibilités d'écriture spatiale : les partitions sont des ensembles d'éléments graphiques définis paramétriquement ou bien à l'aide d'un langage de programmation dédié, que des curseurs vont parcourir. L'information de position de chaque curseur est envoyée en OSC, ce qui permet l'intégration à d'autres logiciels.
 
 Une méthode d'écriture de la spatialisation par contraintes est proposée par Olivier Delerue avec le système MusicScpace\cite{delerue_spatialisation_2004}. Cela permet une approche déclarative à l'écriture de partition, en spécifiant des contraintes telles que "deux objets ne doivent jamais être à plus de deux mètres l'un de l'autre" ou bien "l'angle entre deux objets et l'auditeur doit être supérieur à 90 degrés". Les objets peuvent être notamment des sources sonores. Une édition graphique de ces contraintes est proposée, et elles sont représentées en termes de cercles et de segments reliant les objets qu'elles contraignent.
 
@@ -118,9 +140,16 @@ L'intérêt de telles restitutions n'est pas seulement artistique : l'audio spat
 \subsection{Pratique liée à l'interaction}
 
 % NOTE : faire partie qui différencie création via objets, création de mappings, création de trajectoires et qui compare les différentes approches que l'on a vu.
+% NOTE : parler aussi de la gestion de l'environnement dans le son spatial (absorption de l'air, etc.)
 % DIRE que certains modèles considèrent que les trajectoires sont un objet de premier plan mais pas d'autres. Trajectoires de premier plan signifie qu'une trajectoire peut notamment dépendre d'une autre et être déplacée elle aussi.
 % TRAJECTOIRES : relatif / absolu ? 
 \subsubsection{Jeu vidéo}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.25]{images/cryengine.jpg}
+    \caption{Positionnement de sources sonores dans le CryEngine}
+    \label{fig.cryengine}
+\end{figure}
 La notion d'espace (et plus généralement, d'espace-temps) intervient à plusieurs échelles lors de la création de jeux vidéos. 
 Elle est présente notamment à l'échelle du niveau de jeu, et décrit directement les interactions entre le personnage et son environnement, 
 comme ce qu'il se passe lors d'une rencontre avec un ennemi ou un passage sur un objet bonus. 
@@ -131,9 +160,17 @@ Cela permet d'appréhender la complexité de telles \oe uvres : les jeux vidéos
 
 Cécile le Prado s'intéresse plus particulièrement au lien entre les espaces visuels et sonores dans les jeux vidéos\cite{le_prado_ecriture_2013} par le biais de la cartographie.
 
-Enfin, les moteurs de jeux généralistes tels que Unreal Engine, Unity, Unigine, Cry Engine, ont généralement des outils rudimentaires pour le positionnement du son. Mais du fait de leur extensibilité, il existe une grande quantité d'outils implémentant divers algorithmes de spatialisation, comme par exemple 3Dception\footnote{\url{http://www.twobigears.com/3dception_unity.php}} ou IOSONO Proximity\footnote{\url{http://www.iosono-sound.com/game-audio}}. Cependant, il convient de noter que la partie qui est la plus travaillée durant la conception d'un jeu est généralement la partie graphique, et que le son spatialisé, malgré tout ce qu'il peut apporter, est traité comme un citoyen de seconde zone.
 
-De plus, dans de nombreux cas il n'y a que peu de travail sonore nécessaire : l'idée est de recréer un environnement réaliste, ce qui ne permet pas une marge de créativité énorme, mais plutôt des algorithmes précis.
+Enfin, les moteurs de jeux généralistes tels que Unreal Engine, Unity, Unigine, Cry Engine, ont généralement des outils rudimentaires pour le positionnement du son (fig.~\ref{fig.cryengine}). Mais du fait de leur extensibilité, il existe une grande quantité d'outils implémentant divers algorithmes de spatialisation, comme par exemple 3Dception\footnote{\url{http://www.twobigears.com/3dception_unity.php}} (fig.~\ref{fig.3Dception}) ou IOSONO Proximity\footnote{\url{http://www.iosono-sound.com/game-audio}}. Cependant, il convient de noter que la partie qui est la plus travaillée durant la conception d'un jeu est généralement la partie graphique, et que le son spatialisé, malgré tout ce qu'il peut apporter, est traité comme un citoyen de seconde zone.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/3Dception.png}
+    \caption{Réflexion du son dans 3Dception.}
+    \label{fig.3Dception}
+\end{figure}
+
+De plus, dans de nombreux cas il n'y a que peu de travail sonore nécessaire : l'idée est de recréer un environnement réaliste, ce qui ne permet pas une marge de créativité énorme, mais demande plutôt des algorithmes précis.
 \subsubsection{Systèmes interactifs}
 
 - Les objets qui étaient auparavant simplement connectés ont maintenant des infos de positions (téléphone, etc.) avec lesquelles il est possible de travailler (\cite{beal_spacetime_2015})
