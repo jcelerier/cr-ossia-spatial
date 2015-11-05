@@ -11,7 +11,7 @@
 \usepackage[backend=biber,style=trad-alpha]{biblatex} 
 
 \bibliography{document.bib} % or
-\geometry{hmargin=2.5cm,vmargin=1.5cm}
+\geometry{hmargin=3cm,vmargin=2cm}
 
 \title{État de l'art - spatial}
 
@@ -21,6 +21,7 @@
 \acrodef{VBAP}{Vector Base Amplitude Panning}
 \acrodef{WFS}{Wave-Field Synthesis}
 \acrodef{GIS}{Geographic Information Service}
+\acrodef{WIMP}{Windows, Icons, Menus and Pointing device}
 \begin{document}
 \maketitle
 
@@ -108,20 +109,20 @@ Le logiciel IanniX\cite{jacquemin_iannix_2012} (fig.~\ref{fig.iannix}) dispose a
 Une méthode d'écriture de la spatialisation par contraintes est proposée par Olivier Delerue avec le système MusicScpace\cite{delerue_spatialisation_2004}. Cela permet une approche déclarative à l'écriture de partition, en spécifiant des contraintes telles que "deux objets ne doivent jamais être à plus de deux mètres l'un de l'autre" ou bien "l'angle entre deux objets et l'auditeur doit être supérieur à 90 degrés". Les objets peuvent être notamment des sources sonores. Une édition graphique de ces contraintes est proposée, et elles sont représentées en termes de cercles et de segments reliant les objets qu'elles contraignent.
 
 Des données spatiales peuvent aussi être utilisées directement pour créer des mappings sonores. C'est le cas notamment de la bibliothèque Topos\cite{naveda_topos_2014}, qui permet de capter le mouvement de danseurs et d'en extraire des informations pouvant être utiles pour la conception de pièces de musique interactives. Une fois que le mouvement du danseur est capturé via un périphérique externe, il devient possible d'extraire des informations telles que le volume occupé par le danseur, sa vitesse, ou bien diverses mesures relatives à l'évolution de deux ou quatres points dans le temps, comme l'instabilité ou les collisions entre différentes parties du corps. Ces données peuvent ensuite être réutilisées dans Pure Data pour de la génération de musique.
-\subsubsection{Interaction spatiale pour création de son}
-,\cite{sasamoto_controlling_2013},
+
+Enfin, il convient de noter la richesse pour ce qui est des modes d'entrée et d'interaction. Par exemple, il existe plusieurs possibilités de composition musicale à l'aide de tables interactives comme la Reactable\cite{kaltenbranner_reactable:_2006} et différentes approches dérivées qui peuvent être spécifiquement axées sur la spatialisation du son\cite{sasamoto_controlling_2013}.
 
 \subsubsection{Composition dans des environnements en 3D}
 Une approche particulière est celle de l'immersion dans un monde virtuel en trois-dimensions pour la composition de musique. Cette approche est présentée par Michael Wozniewski dans~\cite{wozniewski_framework_2006}. Cela permet de définir et visualiser la propagation potentielle des ondes sonores dans un espace donné. De plus, en utilisant des méthodes de tracking de mouvement et des casques de réalité virtuelle, il est possible d'ouvrir de nombreuses possibilités d'interaction manuelle avec des objets virtuels. L'implémentation est faite en PureData.
 
-D'autres possibilités d'utilisation d'environnement 3d à des fins d'écriture musicale sont suivies par Florent Berthaut avec le DRILE\cite{berthaut_drile:_2010}. Notamment, l'interaction spatiale est utilisée pour manipuler une hiérarchie plus aisément que via des interactions WIMP traditionnelles.
+D'autres possibilités d'utilisation d'environnement 3d à des fins d'écriture musicale sont suivies par Florent Berthaut avec le DRILE\cite{berthaut_drile:_2010}. Notamment, l'interaction spatiale est utilisée pour manipuler une hiérarchie plus aisément que via des interactions \ac{WIMP} traditionnelles.
 
 Dans les deux cas, ce sont des approches orientées vers la manipulation d'objets.
 
 \subsubsection{Acoustique virtuelle}
 Il existe plusieurs méthodes pour simuler un environnement virtuel (comme par exemple dans un jeu vidéo) sur le plan acoustique, en tenant compte de la géométrie dans laquelle peut se trouver le joueur.
 
-Les approches les plus simples utilisent simplement une atténuation linéaire entre la position du microphone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir. C'était le cas notamment pour certaines implémentations d'OpenAL\cite{hiebert_openal_2005}. Différents procédéss, comme ceux proposés par la technologie EAX\cite{funkhouser_survey_2003}, permettent d'ajouter une forme d'occlusion basique, ainsi que des effets de réverbération statique dans des endroits donnés pour enrichir l'impression d'espace. Des outils plus récents tels que FMOD et wWise s'intègrent notamment avec les moteurs de jeux pour pouvoir tirer parti directement des objets positionnés dans l'espace du moteur de jeu.
+Les approches les plus simples utilisent simplement une atténuation linéaire entre la position du microphone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir. C'était le cas notamment pour certaines implémentations d'OpenAL\cite{hiebert_openal_2005}. Différents procédés, comme ceux proposés par la technologie EAX\cite{funkhouser_survey_2003}, permettent d'ajouter une forme d'occlusion basique, ainsi que des effets de réverbération statique dans des endroits donnés pour enrichir l'impression d'espace. Des outils plus récents tels que FMOD et wWise s'intègrent notamment avec les moteurs de jeux pour pouvoir tirer parti directement des objets positionnés dans l'espace du moteur de jeu.
 
 Cependant, il existe peu d'approches permettant d'être créatif par rapport aux possibilités qui sont offertes par l'outil informatique : notamment, les sources sont souvent ponctuelles alors que rien n'empêche de réfléchir à des sources planes ou volumétriques. 
 
@@ -129,9 +130,10 @@ Le rendu se fait généralement à l'aide de méthodes de lancer de rayon, inspi
 Un procédé courant est maintenant d'utiliser les \ac{GPU} pour effectuer des calculs lourds mais facilement parallélisables\cite{rodriguez_performance_2014,cheng_design_2014,taylor_guided_2012}. Il est aussi possible de précalculer une fonction de convolution correspondant aux environnements virtuels que l'on veut parcourir, cependant cela demande des ressources en mémoire très importantes\cite{raghuvanshi_parametric_2014}.
 
 \subsubsection{Restitution spatiale}
-Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bilbiothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, \ac{VBAP}, \ac{DBAP} et \ac{WFS}. Une autre proposition d'architecture modulaire, par strates, est proposée par Nils Peters dans~\cite{peters_stratified_2009}.
-
+Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bilbiothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, \ac{VBAP}, \ac{DBAP} et \ac{WFS}.
 La communication entre la gestion de la scène et le rendu se fait via le format standardisé SpatDIF\cite{peters_spatial_2013} par OSC. % TODO décrire plus loin
+
+Une autre proposition d'architecture modulaire, par strates, est proposée par Nils Peters dans~\cite{peters_stratified_2009}.
 
 Les différentes méthodes de spatialisation citées sont comparées via la capacité des auditeurs à situer la présence d'une source sonore dans l'espace dans~\cite{bates_comparative_2007}, et la précision de leur localisation.
 
@@ -143,6 +145,7 @@ L'intérêt de telles restitutions n'est pas seulement artistique : l'audio spat
 % NOTE : parler aussi de la gestion de l'environnement dans le son spatial (absorption de l'air, etc.)
 % DIRE que certains modèles considèrent que les trajectoires sont un objet de premier plan mais pas d'autres. Trajectoires de premier plan signifie qu'une trajectoire peut notamment dépendre d'une autre et être déplacée elle aussi.
 % TRAJECTOIRES : relatif / absolu ? 
+% NOTE : dire qu'énormément de projets sont faits au cas-par-cas.
 \subsubsection{Jeu vidéo}
 \begin{figure}[h]
     \centering
@@ -160,7 +163,6 @@ Cela permet d'appréhender la complexité de telles \oe uvres : les jeux vidéos
 
 Cécile le Prado s'intéresse plus particulièrement au lien entre les espaces visuels et sonores dans les jeux vidéos\cite{le_prado_ecriture_2013} par le biais de la cartographie.
 
-
 Enfin, les moteurs de jeux généralistes tels que Unreal Engine, Unity, Unigine, Cry Engine, ont généralement des outils rudimentaires pour le positionnement du son (fig.~\ref{fig.cryengine}). Mais du fait de leur extensibilité, il existe une grande quantité d'outils implémentant divers algorithmes de spatialisation, comme par exemple 3Dception\footnote{\url{http://www.twobigears.com/3dception_unity.php}} (fig.~\ref{fig.3Dception}) ou IOSONO Proximity\footnote{\url{http://www.iosono-sound.com/game-audio}}. Cependant, il convient de noter que la partie qui est la plus travaillée durant la conception d'un jeu est généralement la partie graphique, et que le son spatialisé, malgré tout ce qu'il peut apporter, est traité comme un citoyen de seconde zone.
 
 \begin{figure}[h]
@@ -171,20 +173,22 @@ Enfin, les moteurs de jeux généralistes tels que Unreal Engine, Unity, Unigine
 \end{figure}
 
 De plus, dans de nombreux cas il n'y a que peu de travail sonore nécessaire : l'idée est de recréer un environnement réaliste, ce qui ne permet pas une marge de créativité énorme, mais demande plutôt des algorithmes précis.
-\subsubsection{Systèmes interactifs}
 
-- Les objets qui étaient auparavant simplement connectés ont maintenant des infos de positions (téléphone, etc.) avec lesquelles il est possible de travailler (\cite{beal_spacetime_2015})
+\subsubsection{Interaction}
+La majorité des outils que nous avons vu jusqu'à présent sont des outils de création qui fonctionnent peu ou prou avec le paradigme d'interface \ac{WIMP}, modulo des spécificités pour la création de jeux ou d'univers en 3D par exemple. Cette partie présente plus en avant les possibilités d'interaction qu'il peut exister dans le domaine spatial.
 
-- Modèle d'interaction homme-machine pour la réalité augmentée, avec de nombreuses définitions : \cite{chalon_realite_2004}
+Nous distinguons deux aspects : la conception de contenu spatial est par essence une activité interactive que nous désirons étudier. 
+Mais dans certains cas, on désire concevoir des applications offrant une part d'interactivité à l'utilisateur final, comme cela est le cas dans les bornes interactives par exemple. 
+L'interaction étant souvent gestuelle, un modèle spécifique d'espace géré en temps réel mais conçu à l'avance devient alors nécessaire.
+Ces deux aspects sont donc liés : une des thématiques qui nous intéresse est la conception d'outils de conceptions, notamment d'interaction. Il serait possible de parler de méta-conception.
 
-- État de l'art complet sur l'interaction avec environnements 3D.
-\cite{jankowski_advances_2015}
+Un état de l'art très complet pour l'interaction homme-machine dans un cadre de réalité mixte est présenté dans la thèse de René Chalon~\cite{chalon_realite_2004}. Outre une description des différents périphériques d'entrée-sortie disponibles à l'époque, sont présentés différents modèles adaptés à la gestion de l'interaction dans la conception d'une application en réalité mixte. Notamment, le modèle IRVO est introduit, et permet la séparation entre les objets réels, manipulés par l'utilisateur dans le monde physique, et ceux, virtuels qui sont uniquement présents dans la machine et représentés par projection. Une grande complexité réside dans l'interaction entre les deux espaces que sont le monde réel et virtuel, et le mapping d'informations de l'un à l'autre. Ces questions ont notamment été étudiées par Michel Beaudouin-Lafont avec la théorie de l'interaction instrumentale.
 
-- Production de dessin à l'aide du souffle
-\cite{shen_blowbrush:_2014}
+Un second état de l'art, plus récent et axé spécifiquement sur l'interaction qu'il peut y avoir avec les environnements 3D est présenté dans~\cite{jankowski_advances_2015}. Les méthodes d'interaction sont séparées entre celles qui ciblent la navigation dans un espace 3D, celles qui visent la sélection et manipulation de données, et celles qui permettent le contrôle des systèmes intermédiaires dans un environnement axé sur la 3D. 
 
-- Interfaces imaginaires : il existe un monde en 3D superposé au monde en 2D existant.
-\cite{gustafson_imaginary_2010}
+Notamment, il existe des interfaces extrêmement spécifiques, qui peuvent souvent être utilisées à but artistique. Par exemple, le système BlowBrush\cite{shen_blowbrush:_2014} utilise un moulin à vent interactif pour peindre des feuilles sur un canvas virtuel.
+
+Enfin, le développement des interfaces imaginaires\cite{gustafson_imaginary_2010}, qui superposent des informations virtuelles au monde réel sans pour autant avoir de forme visible, ouvre de nouvelles possibilités en terme de conception spatiale, car il devient possible de tricher quant à la localisation réelle des objets : dans le jeu de basketball imaginaire présenté, la position de la balle est par exemple régie par un système probabiliste et l'acquisition d'information par les joueurs se fait via le son.
 
 \subsubsection{Muséographie}
 - Création de partition à partir d'information de couleur d'une image en 2D. Zones et progressions.
@@ -211,6 +215,9 @@ Puis, outil de conception complet de robot dans~\cite{lee_virtual_2014} à l'aid
 \cite{seo_autonomous_2013}
 
 \section{Manipulation et écriture}
+
+Jacob Beal présente dans~\cite{beal_spacetime_2015} les possibilités de gestion de l'espace-temps dans des applications à l'aide d'appareils connectés. Ces objets, comme les smartphones et smartwatches, étaient auparavant simplement connectés à un réseau, mais ont maintenant des informationss de localisation et position, ainsi que de nombreux autres capteurs très précises avec lesquelles il est possible de concevoir des applications opérant sur de larges échelles géographiques. L'approche utilisée est de traiter l'ensemble des appareils connectés comme un champ, et de programmer des applications en utilisant les lois physiques qui régissent ces champs.
+
 
 \subsection{Extraction de données}
 - Présente 26 features qui peuvent être extraites de tableaux et qui permettent de mesurer les qualités esthétiques, puis de gérer des classifications. Basé sur questionnaire sur 42 participants et 100 tableaux. \cite{li_aesthetic_2009} (cf. slide 26).
