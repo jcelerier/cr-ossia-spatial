@@ -191,20 +191,47 @@ Notamment, il existe des interfaces extrêmement spécifiques, qui peuvent souve
 Enfin, le développement des interfaces imaginaires\cite{gustafson_imaginary_2010}, qui superposent des informations virtuelles au monde réel sans pour autant avoir de forme visible, ouvre de nouvelles possibilités en terme de conception spatiale, car il devient possible de tricher quant à la localisation réelle des objets : dans le jeu de basketball imaginaire présenté, la position de la balle est par exemple régie par un système probabiliste et l'acquisition d'information par les joueurs se fait via le son.
 
 \subsubsection{Muséographie}
-- Création de partition à partir d'information de couleur d'une image en 2D. Zones et progressions.
-\cite{adhitya_composing_2012}
+Dans le cadre d'applications muséograhiques, les informations spatiales sont au premier plan. Notamment, les points clefs sont : 
+\begin{itemize}
+    \item La conception d'interfaces utilisateur accessibles et adaptées à différentes classes d'age. 
+    Michael Despina présente plusieurs faits intéressants, via une comparaison d'installations interactives dans~\cite{michael_comparative_2010}. Par exemple, pour une installation donnée, ce n'est pas parce qu'il y a un grand nombre de degrés de liberté en entrée ni que le contenu est en 3 dimensions que des enfants prennent du plaisir et ont envie de revenir participer à l'installation. C'est plutôt le type d'activité proposée qui va déterminer la qualité de l'expérience, peu importe le médium. De plus, l'auteur note une certaine réticence des jeunes enfants à approcher d'eux-même les installations basées sur un écran par opposition aux formats en table interactive, notamment due à de potentielles restrictions sur l'utilisation d'ordinateur à domicile.
+    \item Des visualisations et univers graphiques et sonores spécifiques à chaque projet.
+    \item Des modes d'interaction variés. Notamment, la place de l'interaction multi-touch, désormais très utilisée, est étudiée dans~\cite{kidd_multi-touch_2011}.
+\end{itemize}
 
-- Comparaison d'installations interactives dans les musées : ce n'est pas parce qu'il y a un grand nombre de degrés de liberté en entrée ni que le contenu est en 3 dimensions que des enfants prennent du plaisir et ont envie de revenir participer à l'installation.
-\cite{michael_comparative_2010}
+De plus, dans le cadre de parcours muséographiques et d'enrichissement du patrimoine culturel, il existe différentes approches qui visent à augmenter les oeuvres et présentations. Par exemple, il est possible de sonifier des tableaux par rapport à différentes méthodes de segmentation, telles que des méthodes simples par clef de couleur. C'estl e cas pour le logiciel SUM\cite{adhitya_composing_2012}.
+Ce logiciel permet d'écrire de véritables partitions basées sur des tableaux, avec un système d'évolution dans le temps et en fonction du geste, qui permet de redécouvrir des tableaux sous un angle sonore.
 
-- Utilisation du son pour enrichir les visites des musées, en permettant la création de paysages sonores.
-\cite{azough_modeet_2014}
+Une autre approche pour l'enrichissement des visites de musées est présentée dans \cite{azough_modeet_2014}. L'approche vise à concevoir des paysages sonores à l'échelle d'une pièce ou même du musée entier, qui sont en lien avec le thème et se raffinent lorsqu'une \oe uvre en particulier est contemplée par les visiteurs. Un modèle (fig.~\ref{fig.visite.musee}) de visite de musée basé sur XML, permettant notamment de définir le degré de libertés accordé au participant est introduit. Il sépare, dans le cas de la scène sonore, les couches physiques et virtuelles qui ont déjà été abordées, ainsi que la couche sémantique.
 
-- Place de l'interaction multitouch dans musées.
-\cite{kidd_multi-touch_2011}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.25]{images/modele_visite_musee.png}
+    \caption{Modèle de structuration de visite de musée de Fatima Kaghat.}
+    \label{fig.visite.musee}
+\end{figure}
 
-- Conception de prévisualisations
-\cite{jung_storyboarding_2010}
+\subsubsection{Prévisualisation d'espaces}
+Lors d'installations ou de spectacles complexes, une des grandes problématiques est celle de la prévisualisation, puis de la répétition.
+Une possibilité est de concevoir des outils de storyboarding qui permettent de définir comment va se dérouler une pièce.
+
+Cela pose de nombreuses questions quand au rôle de ces outils dans un cadre interactif. Par exemple, comment gérer le storyboarding de spectacles interactifs avec 
+un certain nombre de libertés laissées aux acteurs ? Les problèmes les plus importants sont ceux de la synchronisation et de la remise dans un état donné.
+
+Le framework ANSWER, présenté dans~\cite{jung_storyboarding_2010}, vise à fournir des outils pour le storyboarding de films, en partant 
+du langage Director Notation permettant de spécifier le déroulement d'un film sur le plan conceptuel. Le problème est notamment
+celui d'outil de spécification et conception permettant des esquisses de plans de caméra, de positions de décor et d'éclairage, etc.
+L'approche utilisée est basée sur le système déclaratif orienté web X3D qui sera présenté en dernière partie de ce document.
+D'autres langages, tels que TVML (en figure~\ref{fig.tvml}), sont aussi utilisés pour différents stages de la pipeline de production de contenu télévisuel et cinématographique.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.25]{images/tvml.png}
+    \caption{Un exemple d'application de conception TVML, avec une partie prévisualisation et une partie langage.}
+    \label{fig.visite.musee}
+\end{figure}
+
+\cite{lee_stageviz:_2013}
 
 \subsubsection{Robots}
 - Utilisation de robots lors d'une chorégraphie. Positionnements des jointures organisées hiérarchiquement dans l'espace. Souvent, nécessité de rendu dans un environnement virtuel. 
