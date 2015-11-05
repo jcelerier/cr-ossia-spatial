@@ -335,6 +335,8 @@ Une description interactive de trajectoires représentant des mouvements contrai
 La cible est notamment l'enseignement de la physique et de la mécanique plane et le logiciel est sensé fonctionner comme un tableau blanc, mais qui possède une gestion des collisions réaliste. 
 Dans ce système, l'utilisateur décrit un comportement en le dessinant.
  Les modifications faites sont gardées en mémoire : cela devrait permettre, à terme, d'effectuer des comparaisons entre plusieurs mouvements décrits dans un même document.
+ 
+ % TODO Apparatus, SketchPad (qui utilise un modèle de contraintes.)...
 
 Enfin, la question de la représentation d'une animation se pose. 
 En effet, il est souvent important pour l'auteur d'avoir non seulement l'état actuel mais aussi l'état passé et futur d'un élément lorsqu'il se positionne à un point $t$ dans le temps. 
@@ -409,32 +411,59 @@ Mappings de régions de l'espace via interpolation :
 Il existe trois grandes familles de modèles utilisés pour la représentation de données spatiales : 
 \begin{itemize}
 \item Les modèles quantitatifs : ce sont simplement les modèles basés sur des coordonnées cartésiennes. 
-\item Les modèles qualitatifs : ils s'intéressent aux relations entre objets dans l'espace. Notamment, des formes de logique spécialisées sur l'espace existent et seront présentées plus en avant. Un ouvrage de référence sur ce sujet est le \textit{Handbook of Knowledge Representation}\cite{porter_handbook_2008}.
+\item Les modèles qualitatifs : ils s'intéressent aux relations entre objets dans l'espace. Notamment, des formes de logique spécialisées sur l'espace existent et seront présentées plus en avant. Un ouvrage de référence sur ce sujet est le \textit{Handbook of Knowledge Representation}\cite{porter_handbook_2008}. Ces outils sont souvent adaptés aux problèmes d'intelligence artificielle, et de reconnaissance d'image.
 \item Les modèles spécialisés : souvent issus du génie logiciel, ils visent à répondre à un problème précis, comme la localisation géographique à une certaine précision ou des systèmes en réalité virtuelle et augmentée.
 \end{itemize}
 
-- Modèle d'espace pour l'interaction en réalité virtuelle. Apporte les notions de moyen, d'aura, d'awareness..
-\cite{benford_spatial_1993}
+Enfin, il existe des modèles qui ciblent principalement la définition de l'interaction. Notamment, dans \cite{benford_spatial_1993} est présentée une liste de notions qui servent 
+à définir les comportements possibles dans un univers en réalité virtuelle. Parmis les notions présentées, nous retiendrons celle d'aura qui permet de définir un espace autour des 
+objets qui les rend sensibles à l'interaction. Par la suite, les notions de focus et de nimbus sont introduites, qui permettent de rendre compte 
+de la consicence que deux objets vont avoir l'un de l'autre, ce qui permet des interactions riches.
 
 \subsection{Modèles quantitatifs}
+Le cas le plus courant que nous avons vu jusqu'à présent est celui de la trajectoire d'un objet dans l'espace par rapport au temps.
+L'outil évident est l'équation paramétrique : souvent, les fonctions splines sont utilisées pour interpoler 
+des trajectoires entre des keyframes. Mais certains outils, tels que IanniX, permettent de définir textuellement
+via le langage mathématique n'importe quelle équation qui est fonction du temps.
 
-- Trajectoires : via équations paramétriques.
+Cependant, il peut être intéressant de considérer des cas plus généraux que ceux des simples trajectoires. 
+Notamment, pour la conception d'espaces, il y a deux approches : les approches vectorielles et géométriques, 
+qui sont souvent basées sur un petit nombre de primitives composées et transformées, et l'équivalent 
+volumique de la piexlisation, la voxelisation.
 
-- Voxels : \cite{kaufman_volume_1993}
+Cela consiste à diviser l'espace en voxels\cite{kaufman_volume_1993}, qui est le diminutif de Volumetric Pixel.
+Il existe de nombreuses manières d'optimiser un espace voxelisé.
+
 
 - Quadtrees : \cite{eppstein_skip_2008}
 
+- Approches géométriques.
+
 \subsection{Modèles qualitatifs}
+Les modèles qualitatifs visent à représenter l'espace de manière purement logique. Plusieurs ont pour base, ou au moins pour source d'inspiration l'algèbre d'intervalles définie par Allen\cite{allen_towards_1984}. L'avantage est une facilité pour les raisonnements formels sur l'espace. Cependant, l'utilité de ces modèles se trouve plus dans l'analyse de données existantes, dans un contexte sémantique par exemple, que dans la création de nouveaux contenus qui seront spécifiés plus précisément par des auteurs. Les modèles principaux sont décrits dans~\cite{chen_survey_2015}. Sont notamment couvertes les notions de relations entre objets, de direction, de distance, de mouvement et de forme. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=1]{images/rcc8.jpg}
+    \caption{Les relations de RCC-8. Il existe un second modèle, RCC-5, qui ne tient pas compte des différents cas de tangence.}
+    \label{fig.shapetape}
+\end{figure}
+Oppsition méréologie / topologie.
+
+Un modèle courant, Region Connection Calculus-8 (RCC-8) est basé sur la notion de connection topologique entre objets\cite{schlieder_qualitative_1996,dorr_qualitative_2014}. L'avantage de tels models est notamment leur indépendance au nombre de dimensions. Les applications sont courantes dans le domaine des services d'information géographique\cite{bhatt_geospatial_2014}. Des extensions existent notamment pour spécifier l'interaction avec une dimension temporelle\cite{hazarika_qualitative_2012}, ainsi qu'avec non plus des certitudes mais des probabilités de connection\cite{girlea_probabilistic_2012}.
+
 - Construction d'une ontologie du raisonnement spatio-temporel basé sur la notion de réalité. Séparation entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peut ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
 \cite{grenon_formal_2003}
 
-- Modèles qualitatifs : \cite{chen_survey_2015}, \cite{bhatt_geospatial_2014}, \cite{schlieder_qualitative_1996,dorr_qualitative_2014}. Spatio-temporel : \cite{hazarika_qualitative_2012}. \cite{clementini_global_1997}.
+- Description de formes : \cite{clementini_global_1997}.
 
 
 - possibilités probabilistes
 
 %- Modèle d'automates spatio-temporels adaptés à la gestion de systèmes de transports % TODO bof....
 %\cite{zhang_timed_2014}
+
+- Modèles de contraintes : SketchPad.
 \subsection{Modèles spécialisés}
 - Programmation fonctionnelle réactive; là aussi, un DSL dédié en Haskell qui utilise les Arrow.
 \cite{hudak_arrows_2003}
