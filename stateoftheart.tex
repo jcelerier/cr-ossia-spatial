@@ -58,7 +58,7 @@ Beaucoup d'overlap.
 Le problème qui nous intéresse principalement est celui de l'écriture. Cela implique des recherches sur les applications faisant usage d'écriture spatiale, des logiciels interagissant avec des données spatiales, des modèles aptes à représenter de telles données et des paradigmes d'interfaces utilisateur permettant de les modifier et de les retravailler. 
 
 
-
+\newpage
 \section{Pratiques}
 Art : \cite{lodi_spatial_2014}. L'espace dans une dimension collective. Exemple : Steve Eley, Licorne Rose et Invisible. Structure virtuelle apposée dans le monde réel et visible seulement à l'aide d'une application dédiée. Progression de la réalité virtuelle : la tendance est dans l'augmentation de la réalité par l'ajout d'objets qui extraient ou rendent des données (Manovich, 2005). "Spatial Art overlays and unites several spaces into one, making artistic use of time, movement and data or information in a space defined by growth in technological interaction, i.e., a data space."
 
@@ -124,7 +124,14 @@ Dans les deux cas, ce sont des approches orientées vers la manipulation d'objet
 \subsubsection{Acoustique virtuelle}
 Il existe plusieurs méthodes pour simuler un environnement virtuel (comme par exemple dans un jeu vidéo) sur le plan acoustique, en tenant compte de la géométrie dans laquelle peut se trouver le joueur.
 
-Les approches les plus simples utilisent simplement une atténuation linéaire entre la position du microphone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir. C'était le cas notamment pour certaines implémentations d'OpenAL\cite{hiebert_openal_2005}. Différents procédés, comme ceux proposés par la technologie EAX\cite{funkhouser_survey_2003}, permettent d'ajouter une forme d'occlusion basique, ainsi que des effets de réverbération statique dans des endroits donnés pour enrichir l'impression d'espace. Des outils plus récents tels que FMOD et wWise s'intègrent notamment avec les moteurs de jeux pour pouvoir tirer parti directement des objets positionnés dans l'espace du moteur de jeu.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.65]{images/eax.jpg}
+    \caption{E.A.G.L.E., l'éditeur EAX.}
+    \label{fig.eax}
+\end{figure}
+
+Les approches les plus simples utilisent simplement une atténuation linéaire entre la position du microphone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir. C'était le cas notamment pour certaines implémentations d'OpenAL\cite{hiebert_openal_2005}. Différents procédés, comme ceux proposés par la technologie EAX\cite{funkhouser_survey_2003} (fig.~\ref{fig.eax}), permettent d'ajouter une forme d'occlusion basique, ainsi que des effets de réverbération statique dans des endroits donnés pour enrichir l'impression d'espace. Des outils plus récents tels que FMOD et wWise s'intègrent notamment avec les moteurs de jeux pour pouvoir tirer parti directement des objets positionnés dans l'espace du moteur de jeu.
 
 Cependant, il existe peu d'approches permettant d'être créatif par rapport aux possibilités qui sont offertes par l'outil informatique : notamment, les sources sont souvent ponctuelles alors que rien n'empêche de réfléchir à des sources planes ou volumétriques. 
 
@@ -202,7 +209,15 @@ Dans le cadre d'applications muséographiques, les informations spatiales sont a
     \item Des modes d'interaction variés. Notamment, la place de l'interaction multi-touch, désormais très utilisée, est étudiée dans~\cite{kidd_multi-touch_2011}.
 \end{itemize}
 
-De plus, dans le cadre de parcours muséographiques et d'enrichissement du patrimoine culturel, il existe différentes approches qui visent à augmenter les œuvres et présentations. Par exemple, il est possible de sonifier des tableaux par rapport à différentes méthodes de segmentation, telles que des méthodes simples par clef de couleur. C'est le cas pour le logiciel SUM\cite{adhitya_composing_2012}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.25]{images/medialon.jpg}
+    \caption{Medialon KIOSK, un outil de conception de bornes interactives.}
+    \label{fig.medialon}
+\end{figure}
+Le parc logiciel repose généralement sur des outils graphiques comme Adobe Flash, des bibliothèques spécialisées comme Processing ou OpenFrameworks, et des outils de conception génériques tels que Medialon (fig.~\ref{fig.medialon}).
+
+Dans le cadre de parcours muséographiques et d'enrichissement du patrimoine culturel, il existe différentes approches qui visent à augmenter les œuvres et présentations. Par exemple, il est possible de sonifier des tableaux par rapport à différentes méthodes de segmentation, telles que des méthodes simples par clef de couleur. C'est le cas pour le logiciel SUM\cite{adhitya_composing_2012}.
 Ce logiciel permet d'écrire de véritables partitions basées sur des tableaux, avec un système d'évolution dans le temps et en fonction du geste, qui permet de redécouvrir des tableaux sous un angle sonore.
 
 Une autre approche pour l'enrichissement des visites de musées est présentée dans \cite{azough_modeet_2014}. L'approche vise à concevoir des paysages sonores à l'échelle d'une pièce ou même du musée entier, qui sont en lien avec le thème et se raffinent lorsqu'une œuvre en particulier est contemplée par les visiteurs. Un modèle (fig.~\ref{fig.visite.musee}) de visite de musée basé sur XML, permettant notamment de définir le degré de libertés accordé au participant est introduit. Il sépare, dans le cas de la scène sonore, les couches physiques et virtuelles qui ont déjà été abordées, ainsi que la couche sémantique.
@@ -210,7 +225,7 @@ Une autre approche pour l'enrichissement des visites de musées est présentée 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.25]{images/modele_visite_musee.png}
-    \caption{Modèle de structuration de visite de musée de Fatima Kaghat.}
+    \caption{Modèle de structuration de visite de musée de Fatima Kaghat. Les trois modèles ont besoin d'outils appropriés de conception et de réaction adaptés à des données spatiales.}
     \label{fig.visite.musee}
 \end{figure}
 
@@ -267,6 +282,7 @@ Un des problèmes majeurs lors de l'écriture d'une telle chorégraphie sera la 
     \label{fig.spaxels}
 \end{figure}
 
+\newpage
 \section{Outils de manipulation et d'écriture}
 % TODO intro section
 
@@ -310,58 +326,83 @@ Une autre possibilité, implémentée dans Kitty\cite{kazi_kitty:_2014} repose s
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.45]{images/kitty.png}
-    \caption{Un exemple d'animation dynamique avec Kitty.}
+    \includegraphics[scale=0.42]{images/kitty.png}
+    \caption{Un exemple d'animation dynamique avec Kitty. Le soleil se lève lorsque l'éléphant est déplacé.}
     \label{fig.kitty}
 \end{figure}
 
-Une description interactive de trajectoires représentant des mouvements contraints par les lois physiques habituelles en 2D est explorée avec PhysInk\cite{scott_physink:_2013}. La cible est notamment l'enseignement de la physique et de la mécanique plane et le logiciel est sensé fonctionner comme un tableau blanc, mais qui possède une gestion des collisions réaliste. Dans ce système, l'utilisateur décrit un comportement en le dessinant. Les modifications faites sont gardées en mémoire : cela devrait permettre, à terme, d'effectuer des comparaisons entre plusieurs mouvements décrits dans un même document.
+Une description interactive de trajectoires représentant des mouvements contraints par les lois physiques habituelles en 2D est explorée avec PhysInk\cite{scott_physink:_2013}. 
+La cible est notamment l'enseignement de la physique et de la mécanique plane et le logiciel est sensé fonctionner comme un tableau blanc, mais qui possède une gestion des collisions réaliste. 
+Dans ce système, l'utilisateur décrit un comportement en le dessinant.
+ Les modifications faites sont gardées en mémoire : cela devrait permettre, à terme, d'effectuer des comparaisons entre plusieurs mouvements décrits dans un même document.
 
-Enfin, la question de la représentation d'une animation se pose. En effet, il est souvent important pour l'auteur d'avoir non seulement l'état actuel mais aussi l'état passé et futur d'un élément lorsqu'il se positionne à un point t dans le temps. 
+Enfin, la question de la représentation d'une animation se pose. 
+En effet, il est souvent important pour l'auteur d'avoir non seulement l'état actuel mais aussi l'état passé et futur d'un élément lorsqu'il se positionne à un point $t$ dans le temps. 
 Ce n'est pas problématique pour une trajectoire qui ne serait que fonction du temps, et donc qui peut être représentée comme une ligne dans un espace --- même s'il existe un problème de représentation évident d'un espace 3D sur un écran 2D, pour lequel des pistes sont apportées dans~\cite{cohen_interface_1999}.
-En revanche, l'animation d'éléments graphiques ou bien dans plus d'une dimension, comme par exemple une animation au cours de laquelle un objet subirait un morphing, pose des problèmes de représentation. Les logiciels d'animation standard se contentent généralement d'afficher les $n$ images précédentes et suivantes avec une opacité décroissante. Ces problèmes sont encore accrus dans le cas ou l'on aimerait prendre en compte l'interactivité : dans ce cas, il n'y a plus qu'une seule ligne de temps, mais un ensemble d'évolutions possibles pour les objets. 
-Une solution adaptée à la représentation des animations suite à capture de mouvement est présentée dans~\cite{casas_4d_2013}. représentation de l'évolution d'une animation au cours du temps en temps réel. 
+En revanche, l'animation d'éléments graphiques ou bien dans plus d'une dimension, comme par exemple une animation au cours de laquelle un objet subirait un morphing, pose des problèmes de représentation. 
+Une solution adaptée à la représentation des animations suite à capture de mouvement est présentée dans~\cite{casas_4d_2013}. 
+Les logiciels d'animation standard se contentent généralement d'afficher les $n$ images précédentes et suivantes avec une opacité décroissante. 
+Ces problèmes sont encore accrus dans le cas ou l'on aimerait prendre en compte l'interactivité : dans ce cas, il n'y a plus qu'une seule ligne de temps, mais un ensemble d'évolutions possibles pour les objets. 
 
-\subsubsection{Trajectoires}
+\subsubsection{Trajectoires et espaces}
 - État de l'art sur l'édition de courbes 3D en séparant en deux axes : le dispositif physique (entrée - sortie) et le langage d'interaction (création / édition de courbe, et manipulation de la caméra).
 \cite{jacob_design_2014} % NOTE: état de l'art intéressant au début.
 
 
-\subsubsection{Trajectoires pour la spatialisation du son}
-Nous nous intéressons maintenant au cas précis de l'écriture de trajectoires pour le son. Ces trajectoires décrivent le déplacement d'objets sonores invisibles mais dont on est sensé pouvoir donner la position lorsqu'on écoute la pièce.
-- conception de trajectoires à l'aide de dispositifs mobiles multitouch. Étude avec plusieurs compositeurs, qui ont chacun utilisé le logiciel à leur manière et discuté cette utilisation.
-\cite{favory_trajectoires:_2015}
+\subsubsection{Spatialisation du son}
+Nous nous intéressons maintenant au cas précis de l'écriture de trajectoires pour le son. 
+Ces trajectoires décrivent le déplacement d'objets sonores invisibles mais dont on est sensé pouvoir donner la position lorsqu'on écoute la pièce.
+
+Une étude menée avec plusieurs compositeurs a permis de cibler certains des besoins 
+qui sont exprimés lors de la pratique d'écriture de musique à l'aide de contraintes spatiales.
+Cela est fait dans ce cas précis par le biais du logiciel Trajectoires\cite{favory_trajectoires:_2015} qui fonctionne sur dispositifs mobiles multitouch, 
+et est implémenté avec des technologies web.
 
 \cite{garcia_jeremie_processing_2015,garcia_towards_2015} % TODO bof : plutôt pour gestion du son
 
-- Modèle d'espace en 3d dans Max/MSP. En plus de lieux et de trajectoires, il est possible d'écrire l'interaction dans une certaine mesure, ainsi que la communication entre différents agents. Représentation de champs pouvant varier dans le temps et pouvant être sonifiés.
-\cite{wakefield_cosm:_2011}
+Un modèle plus complet d'espace en trois dimensions est fourni par COSM\cite{wakefield_cosm:_2011}.
+Implémenté dans Max/MSP, il offre une grande richesse d'écriture.
+En plus de lieux et de trajectoires, il est possible d'écrire l'interaction dans une certaine mesure, 
+ainsi que la communication entre différents agents.
+Une nouveauté est la possibilité de travailler avec des champs définis mathématiquements. 
+Ces champs peuvent varier dans le temps et être sonifiés par la suite.
 
-- Zirkonium : éditeur pour spatialisation. Utilisation de courbes de Bézier. 
-\cite{wagner_introducing_2014}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{images/zirkonium.png}
+    \caption{Éditeur de trajectoires du Zirkonium Mk. 2.}
+    \label{fig.zirkonium}
+\end{figure}
 
-- Système de spatialisation \ac{WFS} par réalité augmentée. Contient une liste des interactions possibles : disposition spatiale des sources, effets audio, simulation de pièce... Discussion sur la visualisation de sources sonores, 
-\cite{melchior_authoring_2005} 
+Le Zirkonium, en fig.~\ref{fig.zirkonium} est un ensemble d'applications pour Apple OS X à l'origine conçues pour spatialiser le son du Klangdom, un lieu otpimisé pour la diffusion multi-canale du son. C'est un système logiciel basé sur une architecture client-serveur, et pourvur d'un éditeur de trajectoires spatiales pour le son qui permet notamment d'utiliser des courbes de Bézier pour l'écriture\cite{wagner_introducing_2014}. Les briques logicielles communiquent par OSC ce qui permet une certaine souplesse.
 
-- Utilisation de OpenMusic pour composition visuelle de la spatialisation. Scenes spatiales sont représentes par matrices source - paramètres de spat. Trajectoires en coordonnées cartésiennes, et time-tag. Utilisation des données spatiales directement au moment de la synthèse.
-\cite{bresson_spatial_2012}
+Un autre système de spatialisation, cette fois basé sur la réalité augmentée et utilisant la méthode \ac{WFS} est présenté dans~\cite{melchior_authoring_2005}. Notamment, une liste d'interactions possibles est présentée, ainsi que leur résultat dans le système. Il est notamment possible de diposer spatialement les sources sonores, d'ajuster des effets audio, et de simuler l'acoustique d'autres pièces en interagissant avec des objets dont la forme est concue pour avoir un lien avec les son auxquels ils se rapportent.
+
+OpenMusic, avant d'être un système permettant spatialisation, est un outil très puissant de composition informatique. Basé sur la forme graphique du \textit{patcher}, à l'image de Max/MSP et PureData, il agit de manière entièrement hors-ligne. Le paradigme de programmation sous-jacent est fonctionnel (cela permet une conception simple du flot de données) et orienté objet.
+Depuis quelques années, OpenMusic est doté d'outils pour la composition de musique avec des composantes spatiales\cite{bresson_spatial_2012}. Le modèle utilisé est une matrice joignant les sources sonores à des paramètres de spatialisation, qui vont évoluer dans le temps. 
+Les trajectoires sont définies en coordonnées cartésiennes, et peuvent être dotées d'un tag temporel qui permet de faire le lien avec l'écoulement du temps dans le morceau. Cela se rapport à la notion de keyframe vue précédemment. Les données spatiales ont la particularité de pouvoir être utilisées aussi lors de la synthèse des sons, et non pas seulement comme un filtre qui serait appliqué après génération comme c'est le cas dans la majorité des autres approches.
 
 - bibliothèque de spatialisation en C++, permettant la traduction entre différents formats de données spatiales audio.
 \cite{wozniewski_spatosc:_2012}
 
 \subsubsection{Manipulation tangible}
-- Manipulation tangible de courbes à l'aide d'un périphérique spécifique, ShapeTape, qui est déformable et permet d'obtenir informatiquement sa torsion en 32 points pour reconstruire la courbe de manière virtuelle en 3D : 
+- Manipulation tangible de courbes à l'aide d'un périphérique spécifique, ShapeTape, qui est déformable 
+et permet d'obtenir informatiquement sa torsion en 32 points pour reconstruire la courbe de manière virtuelle en 3D : 
 \cite{grossman_interface_2003}
 
 \subsection{Autres approches}
 - Génération d'espace à partir de description textuelle.
 \cite{andriamarozakaniaina_du_2012} 
 
-- Conception de mappings en trois dimensions dans Max/MSP. Mappings de régions de l'espace via interpolation : le mapping a lieu entre N dimensions de contrôle et M dimensions sonores.
+- Conception de mappings en trois dimensions dans Max/MSP. 
+Mappings de régions de l'espace via interpolation :
+ le mapping a lieu entre N dimensions de contrôle et M dimensions sonores.
 \cite{van_nort_lom_2006}
 
- - Zones ? logiciels de 3d paramétrique, etc. % TODO parler des approches standard par keyframes, etc. au début
+ - Zones ? logiciels de 3d paramétrique, etc. 
+ % TODO parler des approches standard par keyframes, etc. au début
 
+\newpage
 \section{Modélisation}
 Il existe trois grandes familles de modèles utilisés pour la représentation de données spatiales : 
 \begin{itemize}
