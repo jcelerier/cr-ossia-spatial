@@ -278,7 +278,7 @@ Un des problèmes majeurs lors de l'écriture d'une telle chorégraphie sera la 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.25]{images/spaxels.jpg}
-    \caption{Des spaxels réalisent une forme à l'aide de trainées lumineuses.}
+    \caption{Des spaxels réalisent une théière dans l'espace à l'aide de trainées lumineuses.}
     \label{fig.spaxels}
 \end{figure}
 
@@ -358,7 +358,7 @@ qui sont exprimés lors de la pratique d'écriture de musique à l'aide de contr
 Cela est fait dans ce cas précis par le biais du logiciel Trajectoires\cite{favory_trajectoires:_2015} qui fonctionne sur dispositifs mobiles multitouch, 
 et est implémenté avec des technologies web.
 
-\cite{garcia_jeremie_processing_2015,garcia_towards_2015} % TODO bof : plutôt pour gestion du son
+% TODO \cite{garcia_jeremie_processing_2015,garcia_towards_2015}
 
 Un modèle plus complet d'espace en trois dimensions est fourni par COSM\cite{wakefield_cosm:_2011}.
 Implémenté dans Max/MSP, il offre une grande richesse d'écriture.
@@ -382,13 +382,16 @@ OpenMusic, avant d'être un système permettant spatialisation, est un outil tr�
 Depuis quelques années, OpenMusic est doté d'outils pour la composition de musique avec des composantes spatiales\cite{bresson_spatial_2012}. Le modèle utilisé est une matrice joignant les sources sonores à des paramètres de spatialisation, qui vont évoluer dans le temps. 
 Les trajectoires sont définies en coordonnées cartésiennes, et peuvent être dotées d'un tag temporel qui permet de faire le lien avec l'écoulement du temps dans le morceau. Cela se rapport à la notion de keyframe vue précédemment. Les données spatiales ont la particularité de pouvoir être utilisées aussi lors de la synthèse des sons, et non pas seulement comme un filtre qui serait appliqué après génération comme c'est le cas dans la majorité des autres approches.
 
-- bibliothèque de spatialisation en C++, permettant la traduction entre différents formats de données spatiales audio.
-\cite{wozniewski_spatosc:_2012}
-
 \subsubsection{Manipulation tangible}
-- Manipulation tangible de courbes à l'aide d'un périphérique spécifique, ShapeTape, qui est déformable 
-et permet d'obtenir informatiquement sa torsion en 32 points pour reconstruire la courbe de manière virtuelle en 3D : 
-\cite{grossman_interface_2003}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.20]{images/tape.png}
+    \caption{Utilisation de ShapeTape.}
+    \label{fig.shapetape}
+\end{figure}
+
+Outre les interactions \ac{WIMP}, prépondérantes, et les modèles basés sur la réalité virtuelle ou augmentée, il existe aussi des interfaces tangibles. Notamment, un périphérique a été spécialement conçu pour le design de courbes : ShapeTape\cite{grossman_interface_2003}, un ruban déformable qui permet d'obtenir informatiquement sa torsion en 32 points pour reconstruire la courbe de manière virtuelle en 3D (fig.~\ref{fig.shapetape}). Un vocabulaire de mouvements possibles (torsions, étirements, poussées, \dots) est défini.
 
 \subsection{Autres approches}
 - Génération d'espace à partir de description textuelle.
@@ -400,7 +403,6 @@ Mappings de régions de l'espace via interpolation :
 \cite{van_nort_lom_2006}
 
  - Zones ? logiciels de 3d paramétrique, etc. 
- % TODO parler des approches standard par keyframes, etc. au début
 
 \newpage
 \section{Modélisation}
@@ -411,44 +413,48 @@ Il existe trois grandes familles de modèles utilisés pour la représentation d
 \item Les modèles spécialisés : souvent issus du génie logiciel, ils visent à répondre à un problème précis, comme la localisation géographique à une certaine précision ou des systèmes en réalité virtuelle et augmentée.
 \end{itemize}
 
-- Construction d'une ontologie du raisonnement spatio-temporel basé sur la notion de réalité. Séparation entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peut ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
-\cite{grenon_formal_2003}
-
-- possibilités probabilistes
-
-- Modèle d'automates spatio-temporels adaptés à la gestion de systèmes de transports % TODO bof....
-\cite{zhang_timed_2014}
-
 - Modèle d'espace pour l'interaction en réalité virtuelle. Apporte les notions de moyen, d'aura, d'awareness..
 \cite{benford_spatial_1993}
 
-- Modélisation fonctionnelle des animations via un DSL dédié en haskell. Présupposé : toute animation a un début, un milieu et une fin. Combinaison d'animations.
-\cite{matlage_every_2011}
-
-\subsection{Modèles de données}
-Ontologie pour le web. Application aux \ac{GIS}.
-- OWL : \cite{mefteh_approche_2013}.
-
-- X3DOM :langage déclaratif intégré au DOM HTML/CSS\cite{jankowski_declarative_2013}. Par opposition à WebGL qui est impératif.
-
-- Adaptés à l'audio
-. SpatDIF et compagnie \cite{peters_spatial_2013}\cite{kendall_towards_2008}
-. \cite{kondoz_object-based_2014}
-
-- Généralistes
-- Programmation fonctionnelle réactive; là aussi, un DSL dédié en Haskell qui utilise les Arrow.
-\cite{hudak_arrows_2003}
-
-Approches langage : (pour reconnaissance : \cite{spranger_recruitment_2011}\cite{spranger_emergent_2012}, )
-
-- Modèles qualitatifs : \cite{chen_survey_2015}, \cite{bhatt_geospatial_2014}, \cite{schlieder_qualitative_1996,dorr_qualitative_2014}. Spatio-temporel : \cite{hazarika_qualitative_2012}. \cite{clementini_global_1997}.
+\subsection{Modèles quantitatifs}
 
 - Trajectoires : via équations paramétriques.
 
 - Voxels : \cite{kaufman_volume_1993}
 
 - Quadtrees : \cite{eppstein_skip_2008}
-\subsection{Problèmes géométriques et calculatoires}
-- citer bibliothèques utiles.
+
+\subsection{Modèles qualitatifs}
+- Construction d'une ontologie du raisonnement spatio-temporel basé sur la notion de réalité. Séparation entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peut ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
+\cite{grenon_formal_2003}
+
+- Modèles qualitatifs : \cite{chen_survey_2015}, \cite{bhatt_geospatial_2014}, \cite{schlieder_qualitative_1996,dorr_qualitative_2014}. Spatio-temporel : \cite{hazarika_qualitative_2012}. \cite{clementini_global_1997}.
+
+
+- possibilités probabilistes
+
+%- Modèle d'automates spatio-temporels adaptés à la gestion de systèmes de transports % TODO bof....
+%\cite{zhang_timed_2014}
+\subsection{Modèles spécialisés}
+- Programmation fonctionnelle réactive; là aussi, un DSL dédié en Haskell qui utilise les Arrow.
+\cite{hudak_arrows_2003}
+- Modélisation fonctionnelle des animations via un DSL dédié en haskell. Présupposé : toute animation a un début, un milieu et une fin. Combinaison d'animations.
+\cite{matlage_every_2011}
+- Diagram ?
+
+- Ontologie pour le web. Application aux \ac{GIS}.
+- OWL : \cite{mefteh_approche_2013}.
+
+- X3DOM :langage déclaratif intégré au DOM HTML/CSS\cite{jankowski_declarative_2013}. Par opposition à WebGL qui est impératif.
+
+- Adaptés à l'audio
+. SpatDIF et compagnie \cite{peters_spatial_2013}\cite{kendall_towards_2008}
+. bibliothèque de spatialisation en C++, permettant la traduction entre différents formats de données spatiales audio. \cite{wozniewski_spatosc:_2012}
+. \cite{kondoz_object-based_2014}
+
+Approches langage : (pour reconnaissance : \cite{spranger_recruitment_2011}\cite{spranger_emergent_2012}, )
+
+%\subsection{Problèmes géométriques et calculatoires}
+%- citer bibliothèques utiles.
 \printbibliography
 \end{document}
