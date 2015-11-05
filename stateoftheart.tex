@@ -8,7 +8,8 @@
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{acronym}
-\usepackage[backend=biber]{biblatex}
+\usepackage[backend=biber,style=trad-alpha]{biblatex} 
+
 \bibliography{document.bib} % or
 \geometry{hmargin=2.5cm,vmargin=1.5cm}
 
@@ -31,16 +32,23 @@ Nous présentons notamment les besoins des concepteurs, ainsi que les diverses s
 peuvent y être apportées, que ce soit par la conception de logiciels dédiés ou bien 
 par des modélisations formelles des notions d'espace.
  
+\begin{itemize}
+    
+\item Délimitation du périmètre
  
- - Délimitation du périmètre
- - Définitions de l'espace dans les différentes pratiques ?
-  * Lien très fort avec la VR et les mondes virtuels - jeux vidéos.
-  * Audio spatialisé
-  * Espace de données et manipulation de données multi-dimensionnelles
-  * Muséographie
-  * Big data ?
-  * Reconaissance d'images 
-  * Conception de spectacles / chorégraphie / etc
+\item Définitions de l'espace dans les différentes pratiques ?
+ 
+ \begin{itemize}
+  \item Lien très fort avec la VR et les mondes virtuels - jeux vidéos.
+  \item Audio spatialisé
+  \item Espace de données et manipulation de données multi-dimensionnelles
+  \item Muséographie
+  \item Big data ?
+  \item Reconaissance d'images 
+  \item Conception de spectacles / chorégraphie / etc
+\end{itemize}
+
+\end{itemize}
 
 Beaucoup d'overlap.
   
@@ -91,7 +99,7 @@ Dans les deux cas, ce sont des approches orientées vers la manipulation d'objet
 \subsubsection{Acoustique virtuelle}
 Il existe plusieurs méthodes pour simuler un environnement virtuel (comme par exemple dans un jeu vidéo) sur le plan acoustique, en tenant compte de la géométrie dans laquelle peut se trouver le joueur.
 
-Les approches les plus simples utilisent simplement une atténuation linéaire entre la position du microphone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir. Différents procédéss, comme ceux proposés par la technologie EAX\cite{funkhouser_survey_2003}, permettent d'ajouter une forme d'occlusion basique, ainsi que des effets de réverbération statique dans des endroits donnés pour enrichir l'impression d'espace. Des outils plus récents tels que FMOD et wWise s'intègrent notamment avec les moteurs de jeux pour pouvoir tirer parti directement des objets positionnés dans l'espace du moteur de jeu.
+Les approches les plus simples utilisent simplement une atténuation linéaire entre la position du microphone virtuel, souvent appelé \textit{listener}, et les sources sonores qu'il peut y avoir. C'était le cas notamment pour certaines implémentations d'OpenAL\cite{hiebert_openal_2005}. Différents procédéss, comme ceux proposés par la technologie EAX\cite{funkhouser_survey_2003}, permettent d'ajouter une forme d'occlusion basique, ainsi que des effets de réverbération statique dans des endroits donnés pour enrichir l'impression d'espace. Des outils plus récents tels que FMOD et wWise s'intègrent notamment avec les moteurs de jeux pour pouvoir tirer parti directement des objets positionnés dans l'espace du moteur de jeu.
 
 Cependant, il existe peu d'approches permettant d'être créatif par rapport aux possibilités qui sont offertes par l'outil informatique : notamment, les sources sont souvent ponctuelles alors que rien n'empêche de réfléchir à des sources planes ou volumétriques. 
 
@@ -109,11 +117,23 @@ L'intérêt de telles restitutions n'est pas seulement artistique : l'audio spat
 
 \subsection{Pratique liée à l'interaction}
 
-% NOTE : faire partie qui différencie création via objets, création de mappings création de trajectoires et qui compare les différentes approches que l'on a vu.
+% NOTE : faire partie qui différencie création via objets, création de mappings, création de trajectoires et qui compare les différentes approches que l'on a vu.
+% DIRE que certains modèles considèrent que les trajectoires sont un objet de premier plan mais pas d'autres. Trajectoires de premier plan signifie qu'une trajectoire peut notamment dépendre d'une autre et être déplacée elle aussi.
+% TRAJECTOIRES : relatif / absolu ? 
 \subsubsection{Jeu vidéo}
-\cite{le_prado_ecriture_2013}
-\cite{salazar_modelisation_2004}
+La notion d'espace (et plus généralement, d'espace-temps) intervient à plusieurs échelles lors de la création de jeux vidéos. 
+Elle est présente notamment à l'échelle du niveau de jeu, et décrit directement les interactions entre le personnage et son environnement, 
+comme ce qu'il se passe lors d'une rencontre avec un ennemi ou un passage sur un objet bonus. 
+Mais une notion plus large de narration spatio-temporelle va parfois sous-tendre le déroulement du jeu.
+Liliana Salazar décrit dans sa thèse~\cite{salazar_modelisation_2004} différents modèles qui peuvent servir à décrire 
+formellement un jeu vidéo; notamment des modèles basés sur les réseaux de Petri pour décrire les niveaux d'un jeu. 
+Cela permet d'appréhender la complexité de telles \oe uvres : les jeux vidéos mêlent logique, temporalité, et spatialité.
 
+Cécile le Prado s'intéresse plus particulièrement au lien entre les espaces visuels et sonores dans les jeux vidéos\cite{le_prado_ecriture_2013} par le biais de la cartographie.
+
+Enfin, les moteurs de jeux généralistes tels que Unreal Engine, Unity, Unigine, Cry Engine, ont généralement des outils rudimentaires pour le positionnement du son. Mais du fait de leur extensibilité, il existe une grande quantité d'outils implémentant divers algorithmes de spatialisation, comme par exemple 3Dception\footnote{\url{http://www.twobigears.com/3dception_unity.php}} ou IOSONO Proximity\footnote{\url{http://www.iosono-sound.com/game-audio}}. Cependant, il convient de noter que la partie qui est la plus travaillée durant la conception d'un jeu est généralement la partie graphique, et que le son spatialisé, malgré tout ce qu'il peut apporter, est traité comme un citoyen de seconde zone.
+
+De plus, dans de nombreux cas il n'y a que peu de travail sonore nécessaire : l'idée est de recréer un environnement réaliste, ce qui ne permet pas une marge de créativité énorme, mais plutôt des algorithmes précis.
 \subsubsection{Systèmes interactifs}
 
 - Les objets qui étaient auparavant simplement connectés ont maintenant des infos de positions (téléphone, etc.) avec lesquelles il est possible de travailler (\cite{beal_spacetime_2015})
