@@ -8,6 +8,7 @@
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{acronym}
+\usepackage[lofdepth,lotdepth]{subfig}
 \usepackage[backend=biber,style=trad-alpha]{biblatex} 
 
 \bibliography{document.bib} % or
@@ -24,9 +25,10 @@
 \acrodef{WIMP}{Windows, Icons, Menus and Pointing device}
 \begin{document}
 \maketitle
+\tableofcontents
 
 \section{Introduction}
-Ce document vise à présenter un état de l'art des partiques impliquant la manipulation de 
+Ce document vise à présenter un état de l'art des pratiques impliquant la manipulation de 
 données spatiales dans un cadre artistique, interactif et muséographique.
 
 Nous présentons notamment les besoins des concepteurs, ainsi que les diverses solutions qui 
@@ -45,7 +47,7 @@ par des modélisations formelles des notions d'espace.
   \item Espace de données et manipulation de données multi-dimensionnelles
   \item Muséographie
   \item Big data ?
-  \item Reconaissance d'images 
+  \item Reconnaissance d'images 
   \item Conception de spectacles / chorégraphie / etc
 \end{itemize}
 
@@ -95,7 +97,7 @@ Des outils logiciels existent pour ces partitions -- ils sont souvent spécialis
 
 Une des problématiques actuelles pour la représentation de l'écriture musicale est celle du geste, et de son lien avec la partition : comment notamment annoter le geste du musicien avec précision ? Et, inversement, comment à partir d'un geste créer un son correspondant ? Ces questions sont abordées dans la description de Soundstudio 4D\cite{sheridan_soundstudio_2004}, dans le cadre d'un système de conception de trajectoires pour spatialisation à l'aide d'interactions en trois dimensions.
 
-Une autre question est l'association entre l'aspect graphique et le résultat. Ainsi, des outils tels que HoloEdit et HoloSpat permettent de travailler avec des trajectoires, mais sont extrêmement spécialisés pour des objets audio. C'est notamment du à la nécessité de composer en ayant conscience à chaque instant des fortes contraintes techniques du moyen de restitution de l'oeuvre. Il serait intéressant d'utiliser ces trajectoires pour contrôler non pas des sources sonores mais des éléments dans des espaces de paramètres quelconques.
+Une autre question est l'association entre l'aspect graphique et le résultat. Ainsi, des outils tels que HoloEdit et HoloSpat permettent de travailler avec des trajectoires, mais sont extrêmement spécialisés pour des objets audio. C'est notamment du à la nécessité de composer en ayant conscience à chaque instant des fortes contraintes techniques du moyen de restitution de l'œuvre. Il serait intéressant d'utiliser ces trajectoires pour contrôler non pas des sources sonores mais des éléments dans des espaces de paramètres quelconques.
 
 \begin{figure}[h]
     \centering
@@ -106,7 +108,7 @@ Une autre question est l'association entre l'aspect graphique et le résultat. A
 
 Le logiciel IanniX\cite{jacquemin_iannix_2012} (fig.~\ref{fig.iannix}) dispose aussi de nombreuses possibilités d'écriture spatiale : les partitions sont des ensembles d'éléments graphiques définis paramétriquement ou bien à l'aide d'un langage de programmation dédié, que des curseurs vont parcourir. L'information de position de chaque curseur est envoyée en OSC, ce qui permet l'intégration à d'autres logiciels.
 
-Une méthode d'écriture de la spatialisation par contraintes est proposée par Olivier Delerue avec le système MusicScpace\cite{delerue_spatialisation_2004}. Cela permet une approche déclarative à l'écriture de partition, en spécifiant des contraintes telles que "deux objets ne doivent jamais être à plus de deux mètres l'un de l'autre" ou bien "l'angle entre deux objets et l'auditeur doit être supérieur à 90 degrés". Les objets peuvent être notamment des sources sonores. Une édition graphique de ces contraintes est proposée, et elles sont représentées en termes de cercles et de segments reliant les objets qu'elles contraignent.
+Une méthode d'écriture de la spatialisation par contraintes est proposée par Olivier Delerue avec le système MusicScpace\cite{delerue_spatialisation_2004}. Cela permet une approche déclarative à l'écriture de partition, en spécifiant des contraintes telles que <<~deux objets ne doivent jamais être à plus de deux mètres l'un de l'autre~>> ou bien <<~l'angle entre deux objets et l'auditeur doit être supérieur à 90 degrés~>>. Les objets peuvent être notamment des sources sonores. Une édition graphique de ces contraintes est proposée, et elles sont représentées en termes de cercles et de segments reliant les objets qu'elles contraignent.
 
 Des données spatiales peuvent aussi être utilisées directement pour créer des mappings sonores. C'est le cas notamment de la bibliothèque Topos\cite{naveda_topos_2014}, qui permet de capter le mouvement de danseurs et d'en extraire des informations pouvant être utiles pour la conception de pièces de musique interactives. Une fois que le mouvement du danseur est capturé via un périphérique externe, il devient possible d'extraire des informations telles que le volume occupé par le danseur, sa vitesse, ou bien diverses mesures relatives à l'évolution de deux ou quatres points dans le temps, comme l'instabilité ou les collisions entre différentes parties du corps. Ces données peuvent ensuite être réutilisées dans Pure Data pour de la génération de musique.
 
@@ -130,7 +132,7 @@ Le rendu se fait généralement à l'aide de méthodes de lancer de rayon, inspi
 Un procédé courant est maintenant d'utiliser les \ac{GPU} pour effectuer des calculs lourds mais facilement parallélisables\cite{rodriguez_performance_2014,cheng_design_2014,taylor_guided_2012}. Il est aussi possible de précalculer une fonction de convolution correspondant aux environnements virtuels que l'on veut parcourir, cependant cela demande des ressources en mémoire très importantes\cite{raghuvanshi_parametric_2014}.
 
 \subsubsection{Restitution spatiale}
-Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bilbiothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, \ac{VBAP}, \ac{DBAP} et \ac{WFS}.
+Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bibliothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, \ac{VBAP}, \ac{DBAP} et \ac{WFS}.
 La communication entre la gestion de la scène et le rendu se fait via le format standardisé SpatDIF\cite{peters_spatial_2013} par OSC. % TODO décrire plus loin
 
 Une autre proposition d'architecture modulaire, par strates, est proposée par Nils Peters dans~\cite{peters_stratified_2009}.
@@ -146,6 +148,7 @@ L'intérêt de telles restitutions n'est pas seulement artistique : l'audio spat
 % DIRE que certains modèles considèrent que les trajectoires sont un objet de premier plan mais pas d'autres. Trajectoires de premier plan signifie qu'une trajectoire peut notamment dépendre d'une autre et être déplacée elle aussi.
 % TRAJECTOIRES : relatif / absolu ? 
 % NOTE : dire qu'énormément de projets sont faits au cas-par-cas.
+% NOTE : nécessité d'un méta-modèle de langage spatial & spatio-temporel ?
 \subsubsection{Jeu vidéo}
 \begin{figure}[h]
     \centering
@@ -159,7 +162,7 @@ comme ce qu'il se passe lors d'une rencontre avec un ennemi ou un passage sur un
 Mais une notion plus large de narration spatio-temporelle va parfois sous-tendre le déroulement du jeu.
 Liliana Salazar décrit dans sa thèse~\cite{salazar_modelisation_2004} différents modèles qui peuvent servir à décrire 
 formellement un jeu vidéo; notamment des modèles basés sur les réseaux de Petri pour décrire les niveaux d'un jeu. 
-Cela permet d'appréhender la complexité de telles \oe uvres : les jeux vidéos mêlent logique, temporalité, et spatialité.
+Cela permet d'appréhender la complexité de telles œuvres : les jeux vidéos mêlent logique, temporalité, et spatialité.
 
 Cécile le Prado s'intéresse plus particulièrement au lien entre les espaces visuels et sonores dans les jeux vidéos\cite{le_prado_ecriture_2013} par le biais de la cartographie.
 
@@ -186,12 +189,12 @@ Un état de l'art très complet pour l'interaction homme-machine dans un cadre d
 
 Un second état de l'art, plus récent et axé spécifiquement sur l'interaction qu'il peut y avoir avec les environnements 3D est présenté dans~\cite{jankowski_advances_2015}. Les méthodes d'interaction sont séparées entre celles qui ciblent la navigation dans un espace 3D, celles qui visent la sélection et manipulation de données, et celles qui permettent le contrôle des systèmes intermédiaires dans un environnement axé sur la 3D. 
 
-Notamment, il existe des interfaces extrêmement spécifiques, qui peuvent souvent être utilisées à but artistique. Par exemple, le système BlowBrush\cite{shen_blowbrush:_2014} utilise un moulin à vent interactif pour peindre des feuilles sur un canvas virtuel.
+Notamment, il existe des interfaces extrêmement spécifiques, qui peuvent souvent être utilisées à but artistique. Par exemple, le système BlowBrush\cite{shen_blowbrush:_2014} utilise un moulin à vent interactif pour peindre des feuilles sur un canevas virtuel.
 
-Enfin, le développement des interfaces imaginaires\cite{gustafson_imaginary_2010}, qui superposent des informations virtuelles au monde réel sans pour autant avoir de forme visible, ouvre de nouvelles possibilités en terme de conception spatiale, car il devient possible de tricher quant à la localisation réelle des objets : dans le jeu de basketball imaginaire présenté, la position de la balle est par exemple régie par un système probabiliste et l'acquisition d'information par les joueurs se fait via le son.
+Enfin, le développement des interfaces imaginaires\cite{gustafson_imaginary_2010}, qui superposent des informations virtuelles au monde réel sans pour autant avoir de forme visible, ouvre de nouvelles possibilités en terme de conception spatiale, car il devient possible de tricher quant à la localisation réelle des objets : dans le jeu de basket-ball imaginaire présenté, la position de la balle est par exemple régie par un système probabiliste et l'acquisition d'information par les joueurs se fait via le son.
 
 \subsubsection{Muséographie}
-Dans le cadre d'applications muséograhiques, les informations spatiales sont au premier plan. Notamment, les points clefs sont : 
+Dans le cadre d'applications muséographiques, les informations spatiales sont au premier plan. Notamment, les points clefs sont : 
 \begin{itemize}
     \item La conception d'interfaces utilisateur accessibles et adaptées à différentes classes d'age. 
     Michael Despina présente plusieurs faits intéressants, via une comparaison d'installations interactives dans~\cite{michael_comparative_2010}. Par exemple, pour une installation donnée, ce n'est pas parce qu'il y a un grand nombre de degrés de liberté en entrée ni que le contenu est en 3 dimensions que des enfants prennent du plaisir et ont envie de revenir participer à l'installation. C'est plutôt le type d'activité proposée qui va déterminer la qualité de l'expérience, peu importe le médium. De plus, l'auteur note une certaine réticence des jeunes enfants à approcher d'eux-même les installations basées sur un écran par opposition aux formats en table interactive, notamment due à de potentielles restrictions sur l'utilisation d'ordinateur à domicile.
@@ -199,10 +202,10 @@ Dans le cadre d'applications muséograhiques, les informations spatiales sont au
     \item Des modes d'interaction variés. Notamment, la place de l'interaction multi-touch, désormais très utilisée, est étudiée dans~\cite{kidd_multi-touch_2011}.
 \end{itemize}
 
-De plus, dans le cadre de parcours muséographiques et d'enrichissement du patrimoine culturel, il existe différentes approches qui visent à augmenter les oeuvres et présentations. Par exemple, il est possible de sonifier des tableaux par rapport à différentes méthodes de segmentation, telles que des méthodes simples par clef de couleur. C'estl e cas pour le logiciel SUM\cite{adhitya_composing_2012}.
+De plus, dans le cadre de parcours muséographiques et d'enrichissement du patrimoine culturel, il existe différentes approches qui visent à augmenter les œuvres et présentations. Par exemple, il est possible de sonifier des tableaux par rapport à différentes méthodes de segmentation, telles que des méthodes simples par clef de couleur. C'est le cas pour le logiciel SUM\cite{adhitya_composing_2012}.
 Ce logiciel permet d'écrire de véritables partitions basées sur des tableaux, avec un système d'évolution dans le temps et en fonction du geste, qui permet de redécouvrir des tableaux sous un angle sonore.
 
-Une autre approche pour l'enrichissement des visites de musées est présentée dans \cite{azough_modeet_2014}. L'approche vise à concevoir des paysages sonores à l'échelle d'une pièce ou même du musée entier, qui sont en lien avec le thème et se raffinent lorsqu'une \oe uvre en particulier est contemplée par les visiteurs. Un modèle (fig.~\ref{fig.visite.musee}) de visite de musée basé sur XML, permettant notamment de définir le degré de libertés accordé au participant est introduit. Il sépare, dans le cas de la scène sonore, les couches physiques et virtuelles qui ont déjà été abordées, ainsi que la couche sémantique.
+Une autre approche pour l'enrichissement des visites de musées est présentée dans \cite{azough_modeet_2014}. L'approche vise à concevoir des paysages sonores à l'échelle d'une pièce ou même du musée entier, qui sont en lien avec le thème et se raffinent lorsqu'une œuvre en particulier est contemplée par les visiteurs. Un modèle (fig.~\ref{fig.visite.musee}) de visite de musée basé sur XML, permettant notamment de définir le degré de libertés accordé au participant est introduit. Il sépare, dans le cas de la scène sonore, les couches physiques et virtuelles qui ont déjà été abordées, ainsi que la couche sémantique.
 
 \begin{figure}[h]
     \centering
@@ -228,45 +231,113 @@ D'autres langages, tels que TVML (en figure~\ref{fig.tvml}), sont aussi utilisé
     \centering
     \includegraphics[scale=0.35]{images/tvml.png}
     \caption{Un exemple d'application de conception TVML, avec une partie prévisualisation et une partie langage. Ici, le langage est extrêmement spécialisé.}
-    \label{fig.visite.musee}
+    \label{fig.tvml}
 \end{figure}
 
-\cite{lee_stageviz:_2013}
+Un autre example de logiciel permettant l'écriture et la visualisation de scénographies est StageViz\cite{lee_stageviz:_2013}, développé en Corée du Sud.
+L'intérêt de ce logiciel est son interopérabilité avec divers logiciels d'écriture, ce qui permet d'avoir un rendu graphique proche de 
+ce que sera l'exécution réelle du spectacle à condition de fournir des modèles 3d adaptés et de fournir une brique d'intégration si un protocole spécifique est nécessaire. 
+L'écriture se fait par successions d'états envoyés via des protocoles dédiés comme DMX.
 
 \subsubsection{Robots}
-- Utilisation de robots lors d'une chorégraphie. Positionnements des jointures organisées hiérarchiquement dans l'espace. Souvent, nécessité de rendu dans un environnement virtuel. 
-\cite{lee_visualization_2013}
-Puis, outil de conception complet de robot dans~\cite{lee_virtual_2014} à l'aide de moteurs virtuels modélisés en 3D et d'un calculateur de couple. Estimation de vitesse du robot à l'aide de motion capture sur 25 degrés de liberté appliquée à un robot réel.
+L'écriture spatiale prend tout son sens lorsque l'on désire travailler avec des robots. De plus en plus d'artistes tentent de lancer des projets impliquant des robots musiciens, danseurs, ... et il est nécessaire de concevoir des outils adaptés. 
+Notamment, les robots ont d'une part de fortes contraintes physiques dont il est nécessaire de tenir compte lors de l'écriture, et d'autre part, sont faillibles; il est nécessaire de concevoir des outils permettant d'adapter le spectacle lors d'une chute par exemple.
 
-- Génération de pas de dance pour un robot à partir de musique.
-\cite{seo_autonomous_2013}
+Un premier exemple est donné dans~\cite{lee_visualization_2013}. La question posée est surtout celle de la conception de robots adaptés à des spectacles:  un outil graphique est présenté, qui permet de concevoir facilement des robots par rapport à des modèles réels en combinant des moteurs virtuels en 3D. De plus, le robot virtuel réponds aux mêmes signaux que le robot réel. Il est alors possible de simuler la chorégraphie robotique sans avoir de problèmes de casse en cas de collision.
 
-\section{Manipulation et écriture}
+Cet outil est développé plus en avant dans~\cite{lee_virtual_2014} : un modèle permettant de calculer le couple appliqué par les moteurs du robot virtuel est rajouté au système, ce qui permet d'éviter d'autres problèmes au moment de l'écriture.
+Pour cette étude, une comparaison probante a été menée entre deux robots réels et leurs avatars virtuels, en utilisant un système de motion capture.
 
-Jacob Beal présente dans~\cite{beal_spacetime_2015} les possibilités de gestion de l'espace-temps dans des applications à l'aide d'appareils connectés. Ces objets, comme les smartphones et smartwatches, étaient auparavant simplement connectés à un réseau, mais ont maintenant des informationss de localisation et position, ainsi que de nombreux autres capteurs très précises avec lesquelles il est possible de concevoir des applications opérant sur de larges échelles géographiques. L'approche utilisée est de traiter l'ensemble des appareils connectés comme un champ, et de programmer des applications en utilisant les lois physiques qui régissent ces champs.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{images/Labanotation.png}
+    \caption{Exemple de Labanotation pour la danse. Il est possible de spécifier la direction, l'intensité, la durée et la partie du corps correspondant à un mouvement.}
+    \label{fig.labanotation}
+\end{figure}
 
+Il est aussi possible d'utiliser des méthodes de mapping pour laisser plus de liberté au robot. Ainsi, dans \cite{seo_autonomous_2013} un système de reconnaissance de musique générant des mouvements de danse en rythme est présenté. Cela part du constant que la plupart des chorégraphies pour robot ont actuellement besoin d'être programmées à la main, ce qui est particulièrement fastidieux. La chorégraphie est ici annotée à l'aide de Labanotation (fig.~\ref{fig.labanotation}), qui est une notation pour la danse, et reposant sur 12 mouvements basiques du corps humain. La forme des symboles rappelle la position du corps et des articulations.
+
+Enfin, les dernières avancées technologiques permettent d'utiliser des drones en plus de robots traditionnels. Une utilisation intéressante est celle des Spaxels~\cite{hortner_spaxels_2012} : chaque drone devient une sorte de pixel spatial, qui porte une couleur et peut se déplacer comme il le désire dans un volume donné (fig.~\ref{fig.spaxels}).   
+Un des problèmes majeurs lors de l'écriture d'une telle chorégraphie sera la gestion de l'inertie et des collisions : là encore, un outil de prévisualisation prenant en compte les lois physiques et les conditions que peuvent rencontrer les drones sera nécessaire.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.25]{images/spaxels.jpg}
+    \caption{Des spaxels réalisent une forme à l'aide de trainées lumineuses.}
+    \label{fig.spaxels}
+\end{figure}
+
+\section{Outils de manipulation et d'écriture}
+% TODO intro section
+
+Jacob Beal présente dans~\cite{beal_spacetime_2015} les possibilités de gestion de l'espace-temps dans des applications à l'aide d'appareils connectés. Ces objets, comme les smartphones et smartwatches, étaient auparavant simplement connectés à un réseau, mais ont maintenant des informations de localisation et position, ainsi que de nombreux autres capteurs très précises avec lesquelles il est possible de concevoir des applications opérant sur de larges échelles géographiques. L'approche utilisée est de traiter l'ensemble des appareils connectés comme un champ, et de programmer des applications en utilisant les lois physiques qui régissent ces champs.
 
 \subsection{Extraction de données}
-- Présente 26 features qui peuvent être extraites de tableaux et qui permettent de mesurer les qualités esthétiques, puis de gérer des classifications. Basé sur questionnaire sur 42 participants et 100 tableaux. \cite{li_aesthetic_2009} (cf. slide 26).
-Example : clarté moyenne logarithmique, forme des segments.
+Une possibilité couramment employée pour l'écriture est celle du mapping, c'est-à-dire que des données sont extraites d'un premier médium, transformées, puis appliquées à un second médium. Cela peut être, par exemple, la transformation d'un mouvement en image ou d'un son en un autre son.
+
+À cet effet, il est utile d'avoir des métriques que l'on peut utiliser comme source de mapping. À titre d'exemple, Congcong Li présente dans~\cite{li_aesthetic_2009} 26 différentes métriques qui peuvent être extraites de tableaux et qui permettent de mesurer les qualités esthétiques, et par la suite de classifier les tableaux par style. La notion d'esthétique est empirique : dans ce travail, elle est basée sur une étude avec 42 participants et 100 tableaux; les participants devaient dire pour chaque tableau s'il était de bonne ou mauvaise qualité puis répondre à un questionnaire détaillé sur les facteurs de qualité perçus. Par la suite, cela a permise de chercher des métriques pouvant influencer ces aspects plus détaillés.
+Des exemples de métriques extraites sont la clarté moyenne logarithmique, ou bien la forme des segments d'un tableau après segmentation algorithmique.
+
+Il serait par la suite intéressant d'appliquer ces métriques en temps réel à des flux vidéos; cela fournirait un espace de paramètres importants avec lequel travailler. 
 
 \subsection{Trajectoires et animation}
-- Rhonda\footnote{http://rhondaforever.com/}, utilisé dans Sonic Wire Sculptor et Ink Space (cf. openframeworks). Détaillé dans~\cite{rasmuson_flying_2013}.
+Une des problématiques les plus importantes est celle de l'écriture des trajectoires. Pour ce faire, il existe de nombreuses approches que nous séparons en deux parties : celles axées sur une entrée directe qui est ensuite analysée, par exemple avec un stylo électronique, et d'autres basées sur des méthodes mathématiques comme des équations paramétriques.
 
-- En animation : keyframes, et rotoscoping. Problématique principale : lier l'espace et le temps. Dans les outils existants, le contrôle du flot du temps est séparé de la création / peinture / etc. Utiliatio nde crayon pour contrôler le temps via les trajectoires.
-\cite{santosa_direct_2013}
+Rhonda\footnote{http://rhondaforever.com/} rentre dans la première approche. C'est un logiciel de dessin en trois dimensions à partir d'une entrée en deux dimensions et d'une source de rotation comme un gyroscope ou une souris adaptée. Il est utilisé dans Sonic Wire Sculptor et Ink Space, détaillé dans~\cite{rasmuson_flying_2013}. Une telle méthode d'entrée serait efficace pour définir des trajectoires spatiales car elle demande une interaction très simple.
 
-- Autre possibilité : textures kinétiques : les textures contiennent une ifnormation de déplacement. Plusieurs formes de textures : textures émettrices qui génèrent des objets, et textures oscillantes. Utilisation d'un graphe relationnel pour définir les interactions qu'il peut y avoir entre les différentes entités.
-\cite{kazi_kitty:_2014}
+\begin{figure}[h]
+\begin{center}
+\subfloat[Keyframes]{
+\includegraphics[scale=0.2]{images/3dsmax_keyframes.jpg}
+\label{fig.sub.keyframe}
+}
 
-- Description de comportements physiques via dessin\cite{scott_physink:_2013}. Fonctionne en 2D.
+ \subfloat[Rotoscoping]{
+\includegraphics[scale=0.18]{images/rotoscoping.jpg}
+\label{fig.sub.roto}
+}
+\caption{Modes d'animation standards : keyframes et rotoscoping}
+\label{fig.animation}
+\end{center}
+\end{figure}
+C'est en opposition avec les logiciels généralistes d'animation graphique, vectorielle ou vidéo. Les techniques les plus utilisées dans ce cas sont celles des keyframes et du rotoscoping (fig. \ref{fig.animation}).
+
+La problématique principale en animation est de lier l'espace et le temps. Les méthodes par keyframes donnent priorité au temps, tandis que les méthodes par rotoscopie sont centrées sur des modifications d'espaces. De plus, dans les outils existants, le contrôle du flot du temps est généralement séparé de la création des données spatio-temporelles (les trajectoires). 
+
+Une solution est proposée dans~\cite{santosa_direct_2013}, en utilisant un crayon pour contrôler le temps via les trajectoires lors de l'animation.
+
+Une autre possibilité, implémentée dans Kitty\cite{kazi_kitty:_2014} repose sur la création de textures kinétiques : les textures, qui généralement ne sont que des informations de couleur, contiennent ici une information de déplacement. Plusieurs types de textures kinétiques sont présentés : des textures émettrices qui génèrent des objets, ainsi que des textures oscillantes qui animent un objet donné. Un graphe relationnel est ensuite utilisé pour définir les interactions qu'il peut y avoir entre les différentes entités de l'animation. Par exemple, cela permet de faire rebondir une balle lorsqu'elle <<~tombe~>> sur une table. Il est ainsi possible d'avoir des animations dynamiques et interactives qui peuvent répondre à une stimulation extérieur, après création (fig.~\ref{fig.kitty}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.45]{images/kitty.png}
+    \caption{Un exemple d'animation dynamique avec Kitty.}
+    \label{fig.kitty}
+\end{figure}
+
+Une description interactive de trajectoires représentant des mouvements contraints par les lois physiques habituelles en 2D est explorée avec PhysInk\cite{scott_physink:_2013}. La cible est notamment l'enseignement de la physique et de la mécanique plane et le logiciel est sensé fonctionner comme un tableau blanc, mais qui possède une gestion des collisions réaliste. Dans ce système, l'utilisateur décrit un comportement en le dessinant. Les modifications faites sont gardées en mémoire : cela devrait permettre, à terme, d'effectuer des comparaisons entre plusieurs mouvements décrits dans un même document.
+
+Enfin, la question de la représentation d'une animation se pose. En effet, il est souvent important pour l'auteur d'avoir non seulement l'état actuel mais aussi l'état passé et futur d'un élément lorsqu'il se positionne à un point t dans le temps. 
+Ce n'est pas problématique pour une trajectoire qui ne serait que fonction du temps, et donc qui peut être représentée comme une ligne dans un espace --- même s'il existe un problème de représentation évident d'un espace 3D sur un écran 2D, pour lequel des pistes sont apportées dans~\cite{cohen_interface_1999}.
+En revanche, l'animation d'éléments graphiques ou bien dans plus d'une dimension, comme par exemple une animation au cours de laquelle un objet subirait un morphing, pose des problèmes de représentation. Les logiciels d'animation standard se contentent généralement d'afficher les $n$ images précédentes et suivantes avec une opacité décroissante. Ces problèmes sont encore accrus dans le cas ou l'on aimerait prendre en compte l'interactivité : dans ce cas, il n'y a plus qu'une seule ligne de temps, mais un ensemble d'évolutions possibles pour les objets. 
+Une solution adaptée à la représentation des animations suite à capture de mouvement est présentée dans~\cite{casas_4d_2013}. représentation de l'évolution d'une animation au cours du temps en temps réel. 
+
+\subsubsection{Trajectoires}
+- État de l'art sur l'édition de courbes 3D en séparant en deux axes : le dispositif physique (entrée - sortie) et le langage d'interaction (création / édition de courbe, et manipulation de la caméra).
+\cite{jacob_design_2014} % NOTE: état de l'art intéressant au début.
+
+
+\subsubsection{Trajectoires pour la spatialisation du son}
+Nous nous intéressons maintenant au cas précis de l'écriture de trajectoires pour le son. Ces trajectoires décrivent le déplacement d'objets sonores invisibles mais dont on est sensé pouvoir donner la position lorsqu'on écoute la pièce.
+- conception de trajectoires à l'aide de dispositifs mobiles multitouch. Étude avec plusieurs compositeurs, qui ont chacun utilisé le logiciel à leur manière et discuté cette utilisation.
+\cite{favory_trajectoires:_2015}
 
 \cite{garcia_jeremie_processing_2015,garcia_towards_2015} % TODO bof : plutôt pour gestion du son
 
 - Modèle d'espace en 3d dans Max/MSP. En plus de lieux et de trajectoires, il est possible d'écrire l'interaction dans une certaine mesure, ainsi que la communication entre différents agents. Représentation de champs pouvant varier dans le temps et pouvant être sonifiés.
 \cite{wakefield_cosm:_2011}
 
-- Zirkonium : étideur pour spatialisation. Utilisation de courbes de Bézier. 
+- Zirkonium : éditeur pour spatialisation. Utilisation de courbes de Bézier. 
 \cite{wagner_introducing_2014}
 
 - Système de spatialisation \ac{WFS} par réalité augmentée. Contient une liste des interactions possibles : disposition spatiale des sources, effets audio, simulation de pièce... Discussion sur la visualisation de sources sonores, 
@@ -278,21 +349,7 @@ Example : clarté moyenne logarithmique, forme des segments.
 - bibliothèque de spatialisation en C++, permettant la traduction entre différents formats de données spatiales audio.
 \cite{wozniewski_spatosc:_2012}
 
-- conception de trajectoires à l'aide de dispositifs mobiles multitouch. Étude avec plusieurs compositeurs, qui ont chacun utilisé le logiciel à leur manière et discuté cette utilisation.
-\cite{favory_trajectoires:_2015}
-
-- Graphe de motion : représentation de l'évolution d'une animation au cours du temps en temps réel. Méthode utilisée : fusion de maillages, permettant des transitions entre différentes animations suite à motion capture. % TODO bof....
-\cite{casas_4d_2013}
-
-
-\subsubsection{Manipulation virtuelle}
-- État de l'art sur l'édition de courbes 3D en séparant en deux axes : le dispositif physique (entrée - sortie) et le langage d'interaction (création / édition de courbe, et manipulation de la caméra).
-\cite{jacob_design_2014} % NOTE: état de l'art intéressant au début.
-
-- Manipulation de courbes 3D en s'aidant des ombres.
-\cite{cohen_interface_1999}
-
-\subsubsection{Manipulation réelle}
+\subsubsection{Manipulation tangible}
 - Manipulation tangible de courbes à l'aide d'un périphérique spécifique, ShapeTape, qui est déformable et permet d'obtenir informatiquement sa torsion en 32 points pour reconstruire la courbe de manière virtuelle en 3D : 
 \cite{grossman_interface_2003}
 
@@ -303,12 +360,15 @@ Example : clarté moyenne logarithmique, forme des segments.
 - Conception de mappings en trois dimensions dans Max/MSP. Mappings de régions de l'espace via interpolation : le mapping a lieu entre N dimensions de contrôle et M dimensions sonores.
 \cite{van_nort_lom_2006}
 
-
  - Zones ? logiciels de 3d paramétrique, etc. % TODO parler des approches standard par keyframes, etc. au début
 
 \section{Modélisation}
-- Généralement : représentations quantitatives (x, y, z) ou qualitatives (via logique).
-\cite{porter_handbook_2008}
+Il existe trois grandes familles de modèles utilisés pour la représentation de données spatiales : 
+\begin{itemize}
+\item Les modèles quantitatifs : ce sont simplement les modèles basés sur des coordonnées cartésiennes. 
+\item Les modèles qualitatifs : ils s'intéressent aux relations entre objets dans l'espace. Notamment, des formes de logique spécialisées sur l'espace existent et seront présentées plus en avant. Un ouvrage de référence sur ce sujet est le \textit{Handbook of Knowledge Representation}\cite{porter_handbook_2008}.
+\item Les modèles spécialisés : souvent issus du génie logiciel, ils visent à répondre à un problème précis, comme la localisation géographique à une certaine précision ou des systèmes en réalité virtuelle et augmentée.
+\end{itemize}
 
 - Construction d'une ontologie du raisonnement spatio-temporel basé sur la notion de réalité. Séparation entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peut ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
 \cite{grenon_formal_2003}
@@ -348,11 +408,6 @@ Approches langage : (pour reconnaissance : \cite{spranger_recruitment_2011}\cite
 
 - Quadtrees : \cite{eppstein_skip_2008}
 \subsection{Problèmes géométriques et calculatoires}
-
-\section{Rendu et visualisation}
-- Utilisation de drones portant des lumières pour faire des pixels dans l'espace.
-\cite{hortner_spaxels_2012}
-\subsection{Sur écran}
-\subsection{Autre}
+- citer bibliothèques utiles.
 \printbibliography
 \end{document}
