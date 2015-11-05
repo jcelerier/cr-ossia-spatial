@@ -19,6 +19,7 @@
 \acrodef{DBAP}{Distance-Based Amplitude Panning}
 \acrodef{VBAP}{Vector Base Amplitude Panning}
 \acrodef{WFS}{Wave-Field Synthesis}
+\acrodef{GIS}{Geographic Information Service}
 \begin{document}
 \maketitle
 
@@ -68,7 +69,7 @@ Ces partitions peuvent être spatiales uniquement dans leur représentation, mai
 
 Des outils logiciels existent pour ces partitions -- ils sont souvent spécialisés. Par exemple, la bibliothèque \ac{ENP}\cite{kuuskankare_expressive_2006} permet de concevoir des partitions graphiques à l'aide d'un éditeur lui aussi graphique et d'un langage basé sur LISP.
 
-Une des problématiques actuelles pour la représentation de l'écriture musicale est celle du geste, et de son lien avec la partition : comment notamment annoter le geste du musicien avec précision ?
+Une des problématiques actuelles pour la représentation de l'écriture musicale est celle du geste, et de son lien avec la partition : comment notamment annoter le geste du musicien avec précision ? Et, inversement, comment à partir d'un geste créer un son correspondant ? Ces questions sont abordées dans la description de Soundstudio 4D\cite{sheridan_soundstudio_2004}, dans le cadre d'un système de conception de trajectoires pour spatialisation à l'aide d'interactions en trois dimensions.
 
 Une autre question est l'association entre l'aspect graphique et le résultat. Ainsi, des outils tels que HoloEdit et HoloSpat permettent de travailler avec des trajectoires, mais sont extrêmement spécialisés pour des objets audio. C'est notamment du à la nécessité de composer en ayant conscience à chaque instant des fortes contraintes techniques du moyen de restitution de l'oeuvre. Il serait intéressant d'utiliser ces trajectoires pour contrôler non pas des sources sonores mais des éléments dans des espaces de paramètres quelconques.
 
@@ -127,70 +128,138 @@ L'intérêt de telles restitutions n'est pas seulement artistique : l'audio spat
 
 - Interfaces imaginaires : il existe un monde en 3D superposé au monde en 2D existant.
 \cite{gustafson_imaginary_2010}
+
 \subsubsection{Muséographie}
+- Création de partition à partir d'information de couleur d'une image en 2D. Zones et progressions.
 \cite{adhitya_composing_2012}
+
+- Comparaison d'installations interactives dans les musées : ce n'est pas parce qu'il y a un grand nombre de degrés de liberté en entrée ni que le contenu est en 3 dimensions que des enfants prennent du plaisir et ont envie de revenir participer à l'installation.
 \cite{michael_comparative_2010}
+
+- Utilisation du son pour enrichir les visites des musées, en permettant la création de paysages sonores.
 \cite{azough_modeet_2014}
+
+- Place de l'interaction multitouch dans musées.
 \cite{kidd_multi-touch_2011}
+
+- Conception de prévisualisations
+\cite{jung_storyboarding_2010}
+
 \subsubsection{Robots}
-\cite{lee_virtual_2014} % NOTE : voir dans les références 1er paragraphe. 
+- Utilisation de robots lors d'une chorégraphie. Positionnements des jointures organisées hiérarchiquement dans l'espace. Souvent, nécessité de rendu dans un environnement virtuel. 
+\cite{lee_visualization_2013}
+Puis, outil de conception complet de robot dans~\cite{lee_virtual_2014} à l'aide de moteurs virtuels modélisés en 3D et d'un calculateur de couple. Estimation de vitesse du robot à l'aide de motion capture sur 25 degrés de liberté appliquée à un robot réel.
+
+- Génération de pas de dance pour un robot à partir de musique.
+\cite{seo_autonomous_2013}
 
 \section{Manipulation et écriture}
 
 \subsection{Extraction de données}
-\cite{li_aesthetic_2009} (cf. slide 26)
-\subsection{Trajectoires et animation}
-- Ink Space (cf. openframeworks)
-\cite{santosa_direct_2013}
-\cite{kazi_kitty:_2014,scott_physink:_2013}
+- Présente 26 features qui peuvent être extraites de tableaux et qui permettent de mesurer les qualités esthétiques, puis de gérer des classifications. Basé sur questionnaire sur 42 participants et 100 tableaux. \cite{li_aesthetic_2009} (cf. slide 26).
+Example : clarté moyenne logarithmique, forme des segments.
 
-\cite{garcia_jeremie_processing_2015,garcia_towards_2015}
+\subsection{Trajectoires et animation}
+- Rhonda\footnote{http://rhondaforever.com/}, utilisé dans Sonic Wire Sculptor et Ink Space (cf. openframeworks). Détaillé dans~\cite{rasmuson_flying_2013}.
+
+- En animation : keyframes, et rotoscoping. Problématique principale : lier l'espace et le temps. Dans les outils existants, le contrôle du flot du temps est séparé de la création / peinture / etc. Utiliatio nde crayon pour contrôler le temps via les trajectoires.
+\cite{santosa_direct_2013}
+
+- Autre possibilité : textures kinétiques : les textures contiennent une ifnormation de déplacement. Plusieurs formes de textures : textures émettrices qui génèrent des objets, et textures oscillantes. Utilisation d'un graphe relationnel pour définir les interactions qu'il peut y avoir entre les différentes entités.
+\cite{kazi_kitty:_2014}
+
+- Description de comportements physiques via dessin\cite{scott_physink:_2013}. Fonctionne en 2D.
+
+\cite{garcia_jeremie_processing_2015,garcia_towards_2015} % TODO bof : plutôt pour gestion du son
+
+- Modèle d'espace en 3d dans Max/MSP. En plus de lieux et de trajectoires, il est possible d'écrire l'interaction dans une certaine mesure, ainsi que la communication entre différents agents. Représentation de champs pouvant varier dans le temps et pouvant être sonifiés.
 \cite{wakefield_cosm:_2011}
+
+- Zirkonium : étideur pour spatialisation. Utilisation de courbes de Bézier. 
 \cite{wagner_introducing_2014}
+
+- Système de spatialisation \ac{WFS} par réalité augmentée. Contient une liste des interactions possibles : disposition spatiale des sources, effets audio, simulation de pièce... Discussion sur la visualisation de sources sonores, 
 \cite{melchior_authoring_2005} 
+
+- Utilisation de OpenMusic pour composition visuelle de la spatialisation. Scenes spatiales sont représentes par matrices source - paramètres de spat. Trajectoires en coordonnées cartésiennes, et time-tag. Utilisation des données spatiales directement au moment de la synthèse.
 \cite{bresson_spatial_2012}
+
+- bibliothèque de spatialisation en C++, permettant la traduction entre différents formats de données spatiales audio.
 \cite{wozniewski_spatosc:_2012}
+
+- conception de trajectoires à l'aide de dispositifs mobiles multitouch. Étude avec plusieurs compositeurs, qui ont chacun utilisé le logiciel à leur manière et discuté cette utilisation.
 \cite{favory_trajectoires:_2015}
+
+- Graphe de motion : représentation de l'évolution d'une animation au cours du temps en temps réel. Méthode utilisée : fusion de maillages, permettant des transitions entre différentes animations suite à motion capture. % TODO bof....
 \cite{casas_4d_2013}
 
 
 \subsubsection{Manipulation virtuelle}
+- État de l'art sur l'édition de courbes 3D en séparant en deux axes : le dispositif physique (entrée - sortie) et le langage d'interaction (création / édition de courbe, et manipulation de la caméra).
 \cite{jacob_design_2014} % NOTE: état de l'art intéressant au début.
+
+- Manipulation de courbes 3D en s'aidant des ombres.
 \cite{cohen_interface_1999}
+
 \subsubsection{Manipulation réelle}
+- Manipulation tangible de courbes à l'aide d'un périphérique spécifique, ShapeTape, qui est déformable et permet d'obtenir informatiquement sa torsion en 32 points pour reconstruire la courbe de manière virtuelle en 3D : 
 \cite{grossman_interface_2003}
 
-
 \subsection{Autres approches}
-\cite{andriamarozakaniaina_du_2012} : Génération d'espace à partir de texte !
+- Génération d'espace à partir de description textuelle.
+\cite{andriamarozakaniaina_du_2012} 
+
+- Conception de mappings en trois dimensions dans Max/MSP. Mappings de régions de l'espace via interpolation : le mapping a lieu entre N dimensions de contrôle et M dimensions sonores.
 \cite{van_nort_lom_2006}
- - Zones ? logiciels de 3d paramétrique, etc.
+
+
+ - Zones ? logiciels de 3d paramétrique, etc. % TODO parler des approches standard par keyframes, etc. au début
 
 \section{Modélisation}
+- Généralement : représentations quantitatives (x, y, z) ou qualitatives (via logique).
 \cite{porter_handbook_2008}
+
+- Construction d'une ontologie du raisonnement spatio-temporel basé sur la notion de réalité. Séparation entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peut ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
 \cite{grenon_formal_2003}
+
+- possibilités probabilistes
+
+- Modèle d'automates spatio-temporels adaptés à la gestion de systèmes de transports % TODO bof....
 \cite{zhang_timed_2014}
+
+- Modèle d'espace pour l'interaction en réalité virtuelle. Apporte les notions de moyen, d'aura, d'awareness..
 \cite{benford_spatial_1993}
 
+- Modélisation fonctionnelle des animations via un DSL dédié en haskell. Présupposé : toute animation a un début, un milieu et une fin. Combinaison d'animations.
 \cite{matlage_every_2011}
+
 \subsection{Modèles de données}
-- OWL : \cite{mefteh_approche_2013}
+Ontologie pour le web. Application aux \ac{GIS}.
+- OWL : \cite{mefteh_approche_2013}.
+
+- X3DOM :langage déclaratif intégré au DOM HTML/CSS\cite{jankowski_declarative_2013}. Par opposition à WebGL qui est impératif.
 
 - Adaptés à l'audio
 . SpatDIF et compagnie \cite{peters_spatial_2013}\cite{kendall_towards_2008}
 . \cite{kondoz_object-based_2014}
+
 - Généralistes
+- Programmation fonctionnelle réactive; là aussi, un DSL dédié en Haskell qui utilise les Arrow.
 \cite{hudak_arrows_2003}
 
 Approches langage : (pour reconnaissance : \cite{spranger_recruitment_2011}\cite{spranger_emergent_2012}, )
 
 - Modèles qualitatifs : \cite{chen_survey_2015}, \cite{bhatt_geospatial_2014}, \cite{schlieder_qualitative_1996,dorr_qualitative_2014}. Spatio-temporel : \cite{hazarika_qualitative_2012}. \cite{clementini_global_1997}.
 
+- Trajectoires : via équations paramétriques.
+
 - Voxels : \cite{kaufman_volume_1993}
+
 - Quadtrees : \cite{eppstein_skip_2008}
 \subsection{Problèmes géométriques et calculatoires}
 
 \section{Rendu et visualisation}
+- Utilisation de drones portant des lumières pour faire des pixels dans l'espace.
 \cite{hortner_spaxels_2012}
 \subsection{Sur écran}
 \subsection{Autre}
