@@ -25,7 +25,9 @@
 \acrodef{WIMP}{Windows, Icons, Menus and Pointing device}
 \begin{document}
 \maketitle
+\newpage
 \tableofcontents
+\newpage
 
 \section{Introduction}
 Ce document vise à présenter un état de l'art des pratiques impliquant la manipulation de 
@@ -39,11 +41,11 @@ par des modélisations formelles des notions d'espace.
     
 \item Délimitation du périmètre
  
-\item Définitions de l'espace dans les différentes pratiques ?
+\item Définitions de l'espace dans les différentes pratiques.
  
  \begin{itemize}
   \item Lien très fort avec la VR et les mondes virtuels - jeux vidéos.
-  \item Audio spatialisé
+  \item Audio spatialisé   % TODO historique
   \item Espace de données et manipulation de données multi-dimensionnelles
   \item Muséographie
   \item Big data ?
@@ -53,16 +55,17 @@ par des modélisations formelles des notions d'espace.
 
 \end{itemize}
 
-Beaucoup d'overlap.
+% TODO Beaucoup d'overlap.
   
 Le problème qui nous intéresse principalement est celui de l'écriture. Cela implique des recherches sur les applications faisant usage d'écriture spatiale, des logiciels interagissant avec des données spatiales, des modèles aptes à représenter de telles données et des paradigmes d'interfaces utilisateur permettant de les modifier et de les retravailler. 
 
 
 \newpage
 \section{Pratiques}
-Art : \cite{lodi_spatial_2014}. L'espace dans une dimension collective. Exemple : Steve Eley, Licorne Rose et Invisible. Structure virtuelle apposée dans le monde réel et visible seulement à l'aide d'une application dédiée. Progression de la réalité virtuelle : la tendance est dans l'augmentation de la réalité par l'ajout d'objets qui extraient ou rendent des données (Manovich, 2005). "Spatial Art overlays and unites several spaces into one, making artistic use of time, movement and data or information in a space defined by growth in technological interaction, i.e., a data space."
+De nombreuses formes d'art sont ancrées dans le monde spatial de manière inhérente. 
+Cependant, les réflexions sur l'espace en tant qu'objet, ainsi que sur ses limites et son influence avec le temps sont plus récentes. Dans l'art, Simona Lodi parle de la position de l'espace dans un cadre collectif\cite{lodi_spatial_2014}. Par exemple, l'installation de Steve Eley est présentée : la Licorne Rose et Invisible. C'est une structure virtuelle apposée dans le monde réel et visible seulement à l'aide d'une application dédiée sur smartphone. Cela dénote une progression des pratiques artistiques qui font usage de la réalité virtuelle : la tendance est dans l'augmentation de la réalité par l'ajout d'objets qui extraient ou rendent des données (Manovich, 2005) : "Spatial Art overlays and unites several spaces into one, making artistic use of time, movement and data or information in a space defined by growth in technological interaction, i.e., a data space.".
 
-Nous étudierons d'abord le cas de l'audio et de la spatialisation en audio (mettre historique).
+Nous étudierons d'abord le cas de l'audio et de la spatialisation en audio, puis nous intéresserons aux questions d'espace qui apparaissent dans des applications plus centrées sur l'interactivité.
 
 \subsection{Pratique appliquée à l'audio}
 \begin{figure}[h]
@@ -74,12 +77,13 @@ Nous étudierons d'abord le cas de l'audio et de la spatialisation en audio (met
 
 Utilisation dans la musique, ainsi que dans des applications de réalité augmentée.
 
-Problème principal dans cadre musical : couplage fort entre l'écriture et le moyen de restitution. Par exemple il est souvent nécessaire d'ajuster les paramètres de spatialisation quand on change l'endroit ou se déroule une représentation. %TODO trouver source.
-Par exemple, la bibliothèque HOA~\cite{colafrancesco_bibliotheque_2013} (fig.~\ref{fig.hoalib}) permet l'encodage et le décodage ambisonique ou binaural. Elle fournit en même temps des outils permettant de modifier et travailer la position des sons dans l'espace, et qui peuvent donc être utilisés à fin d'écriture.
+Problème principal dans cadre musical : couplage fort entre l'écriture et le moyen de restitution. 
+Par exemple il est souvent nécessaire d'ajuster les paramètres de spatialisation quand on change l'endroit ou se déroule une représentation. %TODO trouver source.
+Ainsi la bibliothèque HOA~\cite{colafrancesco_bibliotheque_2013} (fig.~\ref{fig.hoalib}) permet l'encodage et le décodage ambisonique ou binaural. 
+Elle fournit en même temps des outils permettant de modifier et travailer la position des sons dans l'espace, et qui peuvent donc être utilisés à fin d'écriture.
 
 Nous étudions aussi le cas de l'audio dans un cadre de systèmes interactifs : ce sont des systèmes soit très statiques comme dans un audio-guide, soit très dynamiques mais avec une boucle d'exécution simple.
-Par exemple, il est possible d'apposer des couches audio dans un espace réel à l'aide de cartes pour faire des parcours\cite{lemordant_augmented_2010}. 
-
+Par exemple, il est possible d'apposer des couches audio dans un espace réel à l'aide de cartes pour faire des parcours\cite{lemordant_augmented_2010} augmentés. 
 
 \subsubsection{Composition et écriture}
 \begin{figure}[h]
@@ -140,11 +144,14 @@ Un procédé courant est maintenant d'utiliser les \ac{GPU} pour effectuer des c
 
 \subsubsection{Restitution spatiale}
 Il existe de nombreuses méthodes pour effectuer un rendu de son spatial. Certaines s'intéressent au rendu d'une "scène" spatiale donnée le mieux possible à l'aide d'un certain nombre de hauts-parleurs, tandis que d'autres visent la simulation d'une acoustique virtuelle comme nous l'avons vu précédemment. Comme pour HOA, les outils de création sont souvent fortement associés au système de rendu. La bibliothèque 3Dj\cite{perez-lopez_3dj_2015} pour Supercollider vise à séparer cela à l'aide d'une architecture modulaire séparant le mapping d'interface utilisateur, la gestion de scène spatiale, les comportements, les modèles physiques, l'export et le rendu via méthodes ambisoniques, HRTF\cite{noisternig_3d_2003}, \ac{VBAP}, \ac{DBAP} et \ac{WFS}.
-La communication entre la gestion de la scène et le rendu se fait via le format standardisé SpatDIF\cite{peters_spatial_2013} par OSC. % TODO décrire plus loin
+La communication entre la gestion de la scène et le rendu se fait via le format standardisé SpatDIF\cite{peters_spatial_2013} par OSC. 
+% TODO décrire plus loin
 
 Une autre proposition d'architecture modulaire, par strates, est proposée par Nils Peters dans~\cite{peters_stratified_2009}.
 
 Les différentes méthodes de spatialisation citées sont comparées via la capacité des auditeurs à situer la présence d'une source sonore dans l'espace dans~\cite{bates_comparative_2007}, et la précision de leur localisation.
+
+Une méthodologie plus orientée sur la notion d'objets sonores que sur le mixage de canaux est présentée dans ~\cite{kondoz_object-based_2014}. Elle repousse la projection en canaux des objets au tout dernier stage du rendu, juste avant l'envoi aux hauts-parleurs. Cela permet de s'adapter plus facilement à des configurations de haut-parleur varié, néanmoins cette métaphore est plus adaptée au monde du jeu vidéo et de la réalité mixte, qu'à la restitution musicale ou le travail par pistes est une pratique dominante.  
 
 L'intérêt de telles restitutions n'est pas seulement artistique : l'audio spatialisé peut être utilisé pour combler les déficiences visuelles, par exemple via un processus de sonification\cite{tang_assistive_2014}. Cela implique notamment une phase de reconnaissance d'objets, puis une phase de mapping d'un espace visuel défini hiérarchiquement vers un espace de sons qui permettra à la personne malvoyante de reconnaître des objets inertes via le son qui leur sera associé.
 
@@ -348,7 +355,8 @@ Ces problèmes sont encore accrus dans le cas ou l'on aimerait prendre en compte
 
 \subsubsection{Trajectoires et espaces}
 - État de l'art sur l'édition de courbes 3D en séparant en deux axes : le dispositif physique (entrée - sortie) et le langage d'interaction (création / édition de courbe, et manipulation de la caméra).
-\cite{jacob_design_2014} % NOTE: état de l'art intéressant au début.
+\cite{jacob_design_2014} 
+% NOTE: état de l'art intéressant au début.
 
 
 \subsubsection{Spatialisation du son}
@@ -395,16 +403,16 @@ Les trajectoires sont définies en coordonnées cartésiennes, et peuvent être 
 
 Outre les interactions \ac{WIMP}, prépondérantes, et les modèles basés sur la réalité virtuelle ou augmentée, il existe aussi des interfaces tangibles. Notamment, un périphérique a été spécialement conçu pour le design de courbes : ShapeTape\cite{grossman_interface_2003}, un ruban déformable qui permet d'obtenir informatiquement sa torsion en 32 points pour reconstruire la courbe de manière virtuelle en 3D (fig.~\ref{fig.shapetape}). Un vocabulaire de mouvements possibles (torsions, étirements, poussées, \dots) est défini.
 
-\subsection{Autres approches}
-- Génération d'espace à partir de description textuelle.
-\cite{andriamarozakaniaina_du_2012} 
+% TODO \subsection{Autres approches}
+% TODO - Génération d'espace à partir de description textuelle.
+% TODO \cite{andriamarozakaniaina_du_2012} 
 
-- Conception de mappings en trois dimensions dans Max/MSP. 
-Mappings de régions de l'espace via interpolation :
- le mapping a lieu entre N dimensions de contrôle et M dimensions sonores.
-\cite{van_nort_lom_2006}
+% TODO - Conception de mappings en trois dimensions dans Max/MSP. 
+% TODO Mappings de régions de l'espace via interpolation :
+% TODO  le mapping a lieu entre N dimensions de contrôle et M dimensions sonores.
+% TODO \cite{van_nort_lom_2006}
 
- - Zones ? logiciels de 3d paramétrique, etc. 
+ % TODO - Zones ? logiciels de 3d paramétrique, etc. 
 
 \newpage
 \section{Modélisation}
@@ -435,9 +443,9 @@ Cela consiste à diviser l'espace en voxels\cite{kaufman_volume_1993}, qui est l
 Il existe de nombreuses manières d'optimiser un espace voxelisé.
 
 
-- Quadtrees : \cite{eppstein_skip_2008}
+% TODO - Quadtrees : \cite{eppstein_skip_2008}
 
-- Approches géométriques.
+% TODO - Approches géométriques.
 
 \subsection{Modèles qualitatifs}
 Les modèles qualitatifs visent à représenter l'espace de manière purement logique. Plusieurs ont pour base, ou au moins pour source d'inspiration l'algèbre d'intervalles définie par Allen\cite{allen_towards_1984}. L'avantage est une facilité pour les raisonnements formels sur l'espace. Cependant, l'utilité de ces modèles se trouve plus dans l'analyse de données existantes, dans un contexte sémantique par exemple, que dans la création de nouveaux contenus qui seront spécifiés plus précisément par des auteurs. Les modèles principaux sont décrits dans~\cite{chen_survey_2015}. Sont notamment couvertes les notions de relations entre objets, de direction, de distance, de mouvement et de forme. 
@@ -452,9 +460,9 @@ Les modèles qualitatifs visent à représenter l'espace de manière purement lo
 Un modèle courant, Region Connection Calculus-8 (RCC-8) est basé sur la notion de connection topologique entre objets\cite{schlieder_qualitative_1996,dorr_qualitative_2014}. L'avantage de tels models est notamment leur indépendance au nombre de dimensions. Les applications sont courantes dans le domaine des services d'information géographique\cite{bhatt_geospatial_2014}. Des extensions existent notamment pour spécifier l'interaction avec une dimension temporelle\cite{hazarika_qualitative_2012}, ainsi qu'avec non plus des certitudes mais des probabilités de connection\cite{girlea_probabilistic_2012}.
 
 
-- Description de formes : \cite{clementini_global_1997}.
+% TODO - Description de formes : \cite{clementini_global_1997}.
 
-- Modèles de contraintes : SketchPad.
+% TODO - Modèles de contraintes : SketchPad.
 
 
 Plus généralement, la question d'une ontologie pour les modèles spatiaux se pose. Une approche est offerte dans~\cite{grenon_formal_2003}. Cet article présente la construction d'une ontologie du raisonnement spatio-temporel basée sur la notion de réalité. Cela est fait en séparant entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peuvent ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
@@ -468,8 +476,8 @@ Plus généralement, la question d'une ontologie pour les modèles spatiaux se p
 
 Une autre ontologie, visant à être adaptée aux trajectoires dans l'espace(fig.\ref{fig.ontologies}), est présenté par Wafa Mefteh dans~\cite{mefteh_approche_2013}. Un des objectifs est notamment de modéliser et traiter les trajectoires issus de capteurs d'appareils mobiles. Le langage OWL est utilisé pour la modélisation et de multiples autres ontologies adaptées à diverses applications spatiales, notamment la géographie, sont présentées dans cette thèse. Cela peut donc nous permettre d'étudier des modèles qui seraient plus spécifiquement adaptés aux problèmes artistiques évoqués dans ce document.
 
-%- Modèle d'automates spatio-temporels adaptés à la gestion de systèmes de transports % TODO bof....
-%\cite{zhang_timed_2014}
+% TODO - Modèle d'automates spatio-temporels adaptés à la gestion de systèmes de transports % TODO bof....
+% TODO \cite{zhang_timed_2014}
 
 \subsection{Modèles spécialisés}
 Ici, nous nous intéressons plus à des modèles qui ont été spécialisés pour réaliser 
@@ -481,18 +489,18 @@ systèmes spatiaux en temps réel. Un exemple de contrôle appliqué aux robots 
 
 Un second cas propose une modélisation fonctionnelle des animations\cite{matlage_every_2011}. Ce langage part du principe que toute animation possède un début, un milieu et une fin, propose une construction adaptée à une telle conception via le langage \textit{Active}, et présente les différents avantages que cela peut avoir en terme d'écriture. Notamment, la combinaison d'animation est aussi simple à exprimer que la composition de fonctions. Puis, un second langage adapté au rendu, \textit{ChalkBoard}, est présenté.
 
-- Diagram ?
+% TODO  Diagram ?
 
-- X3DOM :langage déclaratif intégré au DOM HTML/CSS\cite{jankowski_declarative_2013}. Par opposition à WebGL qui est impératif.
+Un autre cas de modèle de données, adapté à des informations spatiales, est X3D\cite{jankowski_declarative_2013}. C'est un langage basé sur XML, incorporable dans une page web pour afficher des informations 3D de manière fluide. Par opposition à WebGL, qui correspond à l'interface de programmation impérative d'OpenGL, X3D est purement déclaratif. Il est analogue au standard SVG.
 
-- Adaptés à l'audio
-. SpatDIF et compagnie \cite{peters_spatial_2013}\cite{kendall_towards_2008}
-. bibliothèque de spatialisation en C++, permettant la traduction entre différents formats de données spatiales audio. \cite{wozniewski_spatosc:_2012}
-. \cite{kondoz_object-based_2014}
+Enfin, les différents outils de spatialisation audio qui ont été présentés ont, dans un objectif de collaboration 
+et de facilité, oeuvré vers la conception d'un standard pour les informations de spatialisation : Spatial Data Interchange Format (souvent abrégé SpatDIF ou SDIF dans la littérature)\cite{kendall_towards_2008,peters_spatial_2013}. SpatOSC, Une bibliothèque de spatialisation en C++,a été introduite par Wozniewski dans~\cite{wozniewski_spatosc:_2012}. Elle permet de convertir entre différents formats de données spatiales pour l'audio, .
 
-Approches langage : (pour reconnaissance : \cite{spranger_recruitment_2011}\cite{spranger_emergent_2012}, )
 
-%\subsection{Problèmes géométriques et calculatoires}
-%- citer bibliothèques utiles.
+% TODO Approches langage : (pour reconnaissance : \cite{spranger_recruitment_2011}\cite{spranger_emergent_2012}, )
+
+% TODO \subsection{Problèmes géométriques et calculatoires}
+% TODO - citer bibliothèques utiles.
+\newpage
 \printbibliography
 \end{document}
