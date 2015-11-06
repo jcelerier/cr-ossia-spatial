@@ -448,31 +448,40 @@ Les modèles qualitatifs visent à représenter l'espace de manière purement lo
     \caption{Les relations de RCC-8. Il existe un second modèle, RCC-5, qui ne tient pas compte des différents cas de tangence.}
     \label{fig.shapetape}
 \end{figure}
-Oppsition méréologie / topologie.
 
 Un modèle courant, Region Connection Calculus-8 (RCC-8) est basé sur la notion de connection topologique entre objets\cite{schlieder_qualitative_1996,dorr_qualitative_2014}. L'avantage de tels models est notamment leur indépendance au nombre de dimensions. Les applications sont courantes dans le domaine des services d'information géographique\cite{bhatt_geospatial_2014}. Des extensions existent notamment pour spécifier l'interaction avec une dimension temporelle\cite{hazarika_qualitative_2012}, ainsi qu'avec non plus des certitudes mais des probabilités de connection\cite{girlea_probabilistic_2012}.
 
-- Construction d'une ontologie du raisonnement spatio-temporel basé sur la notion de réalité. Séparation entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peut ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
-\cite{grenon_formal_2003}
 
 - Description de formes : \cite{clementini_global_1997}.
 
+- Modèles de contraintes : SketchPad.
 
-- possibilités probabilistes
+
+Plus généralement, la question d'une ontologie pour les modèles spatiaux se pose. Une approche est offerte dans~\cite{grenon_formal_2003}. Cet article présente la construction d'une ontologie du raisonnement spatio-temporel basée sur la notion de réalité. Cela est fait en séparant entre évènements \textit{continuants} et \textit{occurents}. Ces composants de l'ontologie générale présentée servent de point de vue sur la réalité et peuvent ou non interagir avec les autres. La persistence des continuants se fait par l'existence de parties temporelles successives; le temps est une dimension de spécification des occurents mais pas des continuants.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.40]{images/ontologie.png}
+    \caption{Extrait d'une ontologie des trajectoires spatio-temporelles.}
+    \label{fig.ontologies}
+\end{figure}
+
+Une autre ontologie, visant à être adaptée aux trajectoires dans l'espace(fig.\ref{fig.ontologies}), est présenté par Wafa Mefteh dans~\cite{mefteh_approche_2013}. Un des objectifs est notamment de modéliser et traiter les trajectoires issus de capteurs d'appareils mobiles. Le langage OWL est utilisé pour la modélisation et de multiples autres ontologies adaptées à diverses applications spatiales, notamment la géographie, sont présentées dans cette thèse. Cela peut donc nous permettre d'étudier des modèles qui seraient plus spécifiquement adaptés aux problèmes artistiques évoqués dans ce document.
 
 %- Modèle d'automates spatio-temporels adaptés à la gestion de systèmes de transports % TODO bof....
 %\cite{zhang_timed_2014}
 
-- Modèles de contraintes : SketchPad.
 \subsection{Modèles spécialisés}
-- Programmation fonctionnelle réactive; là aussi, un DSL dédié en Haskell qui utilise les Arrow.
-\cite{hudak_arrows_2003}
-- Modélisation fonctionnelle des animations via un DSL dédié en haskell. Présupposé : toute animation a un début, un milieu et une fin. Combinaison d'animations.
-\cite{matlage_every_2011}
-- Diagram ?
+Ici, nous nous intéressons plus à des modèles qui ont été spécialisés pour réaliser 
+une tache avec élégance. C'est donc sans surprise que nous retrouvons plusieurs 
+langages spécifiques à un domaine (DSL) développés en Haskell.
+Le premier est à l'origine d'un courant de programmation : décrit par Paul Hudak, 
+la programmation fonctionnelle réactive peut être utilisée pour contrôler des 
+systèmes spatiaux en temps réel. Un exemple de contrôle appliqué aux robots est donné dans~\cite{hudak_arrows_2003}.
 
-- Ontologie pour le web. Application aux \ac{GIS}.
-- OWL : \cite{mefteh_approche_2013}.
+Un second cas propose une modélisation fonctionnelle des animations\cite{matlage_every_2011}. Ce langage part du principe que toute animation possède un début, un milieu et une fin, propose une construction adaptée à une telle conception via le langage \textit{Active}, et présente les différents avantages que cela peut avoir en terme d'écriture. Notamment, la combinaison d'animation est aussi simple à exprimer que la composition de fonctions. Puis, un second langage adapté au rendu, \textit{ChalkBoard}, est présenté.
+
+- Diagram ?
 
 - X3DOM :langage déclaratif intégré au DOM HTML/CSS\cite{jankowski_declarative_2013}. Par opposition à WebGL qui est impératif.
 
