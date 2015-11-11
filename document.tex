@@ -6,10 +6,13 @@
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{acronym}
 \usepackage{hyperref}
 \usepackage[backend=biber]{biblatex}
 \bibliography{document.bib} % or
 \geometry{hmargin=2.5cm,vmargin=1.5cm}
+
+\acrodef{CAS}{Computer Algebra System}
 \begin{document}
 
 \section{Préambule}
@@ -211,12 +214,25 @@ En parallèle, les approches orientées données sont souvent plus adaptées à 
 \label{fig.maya}
 \end{figure} 
 
-La méthode que nous proposons combine les deux : utiliser un CAS pour spécifier des objets de base avec les quels travailler, puis permettre à l'utilisateur de faire des transformations graphiques - translation, rotation, scale - sur les objets. Les paramètres de ces objets sont extraits de la formule mathématique et séparés en deux ensembles : ceux qui font partie de l'espace d'évaluation et ceux qui font partie de l'espace de paramétrisation. Par la suite, des propriétés peuvent être extraites à l'aide d'algorithmes intervenant plus tard, comme la collision entre deux objets. Ces propriétés sont ensuites utilisables dans le reste d'i-score via l'arbre de paramètres.
+La méthode que nous proposons combine les deux : utiliser un \ac{CAS} pour spécifier des objets de base avec les quels travailler, puis permettre à l'utilisateur de faire des transformations graphiques - translation, rotation, scale - sur les objets. Les paramètres de ces objets sont extraits de la formule mathématique et séparés en deux ensembles : ceux qui font partie de l'espace d'évaluation et ceux qui font partie de l'espace de paramétrisation. Par la suite, des propriétés peuvent être extraites à l'aide d'algorithmes intervenant plus tard, comme la collision entre deux objets. Ces propriétés sont ensuites utilisables dans le reste d'i-score via l'arbre de paramètres.
 
-Le rendu se fait actuellement par un algorithme naïf de pixelisation, qui devra par la suite être étendu à de la voxelisation pour une manipulation en trois dimensions. Pour des objets définis dans plus de de trois dimensions, il est possible de choisir la restriction que l'on visualise. 
+Le rendu se fait actuellement par un algorithme naïf de pixelisation, qui devra par la suite être étendu à de la voxelisation pour une manipulation en trois dimensions. Pour des objets définis dans plus de de trois dimensions, il est possible de choisir la restriction que l'on visualise. Un exemple est donné en figure \ref{fig.space.iscore}, ou cinq zones sont représentées : 
+\begin{itemize}
+    \item  $1: -y < -50 - x$ (en gris).
+    \item $ 2: x > 50$  (en orange).
+    \item  $3: x == 100$ (en bleu).
+    \item  $4: y == 100$ (en vert).
+    \item $5: (x - x0)^2 + (y - y0) ^2 <= r^2$ pour $x0 = 200, y0 = 200, r = 50 $ (en blanc).
+\end{itemize}
 
 La manipulation et l'édition des objets ainsi créé est faite via l'édition de l'équation de manière textuelle, et nous désirons étudier les interactions utilisateur possibles pour une édition via des modalités purement graphique. 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/space.png}
+    \caption{Processus spatial dans i-score, ainsi que l'interface d'édition.}
+    \label{fig.space.iscore}
+\end{figure} 
 
 \section{Conclusion}
 
