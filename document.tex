@@ -8,12 +8,18 @@
 \usepackage{geometry}
 \usepackage{acronym}
 \usepackage{hyperref}
+\usepackage{pdfpages}
+
+\usepackage[toc,page]{appendix}
 \usepackage[backend=biber]{biblatex}
 \bibliography{document.bib} % or
 \geometry{hmargin=2.5cm,vmargin=1.5cm}
 
 \acrodef{CAS}{Computer Algebra System}
+\title{Compte-rendu sur les méthodes spatiales dans le projet OSSIA.}
+\date{}
 \begin{document}
+    \maketitle
 
 \section{Préambule}
 Ce document vise à présenter les études qui ont été menées en lien avec 
@@ -60,8 +66,7 @@ Dans un cadre muséographique, on a plus souvent des objets sonores qui peuvent 
 
 Cette approche est aussi plus pertinente dans un cadre vidéo-ludique : en effet, les outils de conception de jeu-vidéo (\textit{citer partie rapport cnam}) ont une approche fortement orientée objet - la méthode actuellement la plus répandue dans l'industrie est le pattern Entity-Component-Systems\footnote{Component Based Engine Design, Randy Gaul : http://www.randygaul.net/2013/05/20/component-based-engine-design/}, qui permet d'encapsuler différentes couches applicatives (qui peuvent contenir des données, des comportements...) très simplement dans n'importe quel objet du jeu.
 
-Voici plusieurs examples d'applications :
-\paragraph{Application 1 : Sonopluie}
+Une application a été développée par Blue Yeti : \textbf{Sonopluie}.
 Ici, des utilisateurs font un parcours dans une ville. Ils ont un casque et sont géolocalisés. En fonction de leur position et de leur parcours, ils entendent des messages rappelant des évènements historiques de la ville. 
 
 De plus, si des utilisateurs se croisent, l'application peut en avoir conscience et déclencher des évènements spécifiques.
@@ -74,12 +79,8 @@ Cette application a plusieurs pré-requis :
 \item Enfin, se pose la question de la répartition et de l'interaction entre plusieurs protagonistes. Une possibilité serait de définir des zones d'interactions qui ne s'activent que lorsque plusieurs participants sont présents à l'intérieur. Les périphériques des utilisateurs présents dans cette zone doivent communiquer entre eux (ou bien communiquer via un serveur, mais cela nécessite des appareils possédant une connection internet).
 \end{itemize}
 
-\paragraph{Application 2 : Le promeneur écoutant}
-
-cf. rapport CNAM 
-
 \subsection{Interactivité et interfaces}
-Ici, nous nous intéressons aux possibilités de création et de contrôle dynamique d'interfaces graphiques. La plupart des paradigmes d'UI permettent de définir des vues dans un éditeur graphique, mais ces vues sont en général statiques et il est nécessaire de recourir à des langages de programmation pour avoir une évolution dans le logiciel \textit{(à vrai dire il y a des outils graphiques pour ça dans Qt par exemple, j'imagine que ça doit pouvoir se faire assez bien dans Flash aussi ?)}. 
+Ici, nous nous intéressons aux possibilités de création et de contrôle dynamique d'interfaces graphiques. La plupart des paradigmes d'UI permettent de définir des vues dans un éditeur graphique, mais ces vues sont en général statiques et il est nécessaire de recourir à des langages de programmation pour avoir une évolution personnalisable dans le logiciel. 
 
 Nous aborderons ici deux cas : le premier est celui des interfaces utilisateur programmables graphiquement, ce qui peut s'avérer utile quand il y a de nombreuses animations et objets graphiques non-usuels. Le second est celui des interfaces nécessaires pour contrôler des espaces de paramètres particuliers.
 
@@ -89,8 +90,6 @@ Il reste des problèmes non abordés : notamment la création d'objets dynamique
 Le premier cas est celui d'une application en mode kiosque, possédant un menu de choix des langues, qui mène pour chaque langue à un menu principal permettant de choisir des vidéos à lire en mosaïque.
 
 Lorsqu'une langue est choisie, l'écran principal glisse depuis la droite. Les boutons ont une animation lorsqu'ils sont pressés. Lorsqu'une vidéo est pressée, elle se met en lecture. Des \textit{gestures} permettent de déplacer les vidéos, en suivant des lois de physique basiques (notamment, les vidéos peuvent tourner et rentrer en collision).
-
-(\textit{note:  s'il y a une vraie application muséo à la place ici je suis preneur :) j'ai juste imaginé des choses pour faire un example.})
 
 Les problématiques, ici, sont : 
 \begin{itemize}
@@ -168,6 +167,9 @@ Cela a été l'occasion de comparer le développement d'une chorégraphie entre 
 un langage de programmation graphique inspiré de Scratch. Les résultats ont été probants : il a fallu 
 beaucoup moins de temps pour produire une même chorégraphie dans i-score que dans l'autre langage.
 
+Ce travail continue : un groupe d'étudiants d'école d'ingénieur travaille actuellement à des chorégraphies 
+avec un nombre élevé de Metabots, ainsi qu'au travail avec des drones. Cela nécessite notamment la conception 
+d'outils de simulation appropriés.
 
 \subsection{État de l'art sur méthodes spatiales, positionnement, trajectoires}
 
@@ -184,12 +186,20 @@ beaucoup moins de temps pour produire une même chorégraphie dans i-score que d
 Lorsqu'une zone est activée, elle produit un son qui peut être en relation avec les éléments sous-jacents. % TODO mettre minuit là dedans ?
 
 \subsubsection{Liste des tâches et prototype pour processus de mapping spatial}
-Suite aux différents cas d'utilisation qui ont été présentés, un état de l'art % TODO citer num. annexe
-a été effectué dans le domaine de l'authoring spatial, et des techniques et méthodes possibles.
+Suite aux différents cas d'utilisation qui ont été présentés, un état de l'art, présent en annexe~\ref{annex.2},
+a été effectué dans le domaine de l'authoring spatial, et des techniques et méthodes possibles pour la modélisation et représentation de telles données.
 
 Cet état de l'art a ensuite conduit à la recherche de méthodes possibles pour combler le besoin existant pour un outil permettant de spécifier des scénarios manipulant beaucoup de données spatiales entrelacées entre elles, ainsi qu'avec une évolution temporelle.
 
+Enfin, une liste des tâches pour une première implémentation dans i-score a été donnée. Elle est présente en annexe~\ref{annex.1}.
 Le premier point auquel nous nous intéressons est celui du modèle de données. Il existe deux courants : les approches orientées langage, et les approches orientées données. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/maya.jpg}
+    \caption{Primitives graphiques dans le logiciel de 3D Maya.}
+    \label{fig.maya}
+\end{figure} 
 
 Les premières sont des langages de programmation spécifiquement étudiés pour résoudre le problème posé de manière élégante. Plusieurs possibilités ont été étudiées : 
 \begin{itemize}
@@ -204,28 +214,10 @@ En parallèle, les approches orientées données sont souvent plus adaptées à 
 \begin{itemize}
 \item Il existe des modèles qualitatifs de représentation des données spatiales : RCC-8, OPRA-4, etc. Ces modèles sont principalement étudiés dans le monde de l'intelligence artificielle et de l'ingénierie des connaissances. Ils sont notamment utilisés pour de la reconaissance d'images, de lieus, etc.
 \item Le parc de logiciels graphiques existant se base souvent sur quelques primitives simples qui sont ensuites composées entre elles, ainsi que sur l'utilisation de modèles 3D, comme pour Maya en figure~\ref{fig.maya}.
-
 \end{itemize}
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.5]{images/maya.jpg}
-\caption{Primitives graphiques dans le logiciel de 3D Maya.}
-\label{fig.maya}
-\end{figure} 
 
 La méthode que nous proposons combine les deux : utiliser un \ac{CAS} pour spécifier des objets de base avec les quels travailler, puis permettre à l'utilisateur de faire des transformations graphiques - translation, rotation, scale - sur les objets. Les paramètres de ces objets sont extraits de la formule mathématique et séparés en deux ensembles : ceux qui font partie de l'espace d'évaluation et ceux qui font partie de l'espace de paramétrisation. Par la suite, des propriétés peuvent être extraites à l'aide d'algorithmes intervenant plus tard, comme la collision entre deux objets. Ces propriétés sont ensuites utilisables dans le reste d'i-score via l'arbre de paramètres.
-
-Le rendu se fait actuellement par un algorithme naïf de pixelisation, qui devra par la suite être étendu à de la voxelisation pour une manipulation en trois dimensions. Pour des objets définis dans plus de de trois dimensions, il est possible de choisir la restriction que l'on visualise. Un exemple est donné en figure \ref{fig.space.iscore}, ou cinq zones sont représentées : 
-\begin{itemize}
-    \item  $1: -y < -50 - x$ (en gris).
-    \item $ 2: x > 50$  (en orange).
-    \item  $3: x == 100$ (en bleu).
-    \item  $4: y == 100$ (en vert).
-    \item $5: (x - x0)^2 + (y - y0) ^2 <= r^2$ pour $x0 = 200, y0 = 200, r = 50 $ (en blanc).
-\end{itemize}
-
-La manipulation et l'édition des objets ainsi créé est faite via l'édition de l'équation de manière textuelle, et nous désirons étudier les interactions utilisateur possibles pour une édition via des modalités purement graphique. 
 
 \begin{figure}[h]
     \centering
@@ -234,9 +226,28 @@ La manipulation et l'édition des objets ainsi créé est faite via l'édition d
     \label{fig.space.iscore}
 \end{figure} 
 
-\section{Conclusion}
+Le rendu se fait actuellement par un algorithme naïf de pixelisation, qui devra par la suite être étendu à de la voxelisation pour une manipulation en trois dimensions. Pour des objets définis dans plus de de trois dimensions, il est possible de choisir la restriction que l'on visualise. Un exemple est donné en figure \ref{fig.space.iscore}, ou cinq zones sont représentées : 
+\begin{itemize}
+    \item  $1: -y < -50 - x$ (en gris).
+    \item $ 2: x > 50$  (en orange).
+    \item  $3: x == 100$ (en bleu).
+    \item  $4: y == 100$ (en vert).
+    \item $5: (x - x0)^2 + (y - y0) ^2 <= r^2$ pour $x0 = 200, y0 = 200, r = 50 $ (en blanc). Comme nous savons qu'il s'agit d'un cercle, il est possible d'offrir une meilleure représentation.
+\end{itemize}
 
-Problèmes restants : question de visualisation / rendu, etc.
+La manipulation et l'édition des objets ainsi créé est faite via l'édition de l'équation de manière textuelle, et nous désirons étudier les interactions utilisateur possibles pour une édition via des modalités purement graphique. Il existe aussi des bibliothèques permettant de meilleurs rendus, comme VTK\footnote{www.vtk.org} qui gère la géométrie paramétrique.
 
-\printbibliography
+\newpage
+
+\renewcommand{\appendixtocname}{Annexes}
+\renewcommand{\appendixpagename}{Annexes}
+\begin{appendices}
+    \vspace{8cm}
+\section{Liste de tâches pour le développement~\\d'un processus spatial dans i-score.}\label{annex.1}
+\includepdf[pages={1,2,3,4}]{images/spatial.pdf}
+
+\newpage\vspace*{8cm}\section{État de l'art.}\label{annex.2}
+
+\includepdf[pages=-]{stateoftheart.pdf}
+\end{appendices}
 \end{document}
